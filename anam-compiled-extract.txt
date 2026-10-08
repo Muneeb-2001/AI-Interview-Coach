@@ -1,0 +1,1272 @@
+﻿
+> .next\server\chunks\ssr\src_app_interview_voice_page_tsx_1cqd78-._.js:1:module.exports=[92406,a=>
+{"use strict";let b;var 
+c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w=a.i(87924),x=a.i(72131),y=a.i(50944),z=a.i(874);let 
+A={client:"js-sdk",version:"4.27.0"};var B=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};let C="https://api.anam.a
+i",D="/v1";(c=m||(m={})).CLIENT_METRIC_MEASUREMENT_ERROR="client_error",c.CLIENT_METRIC_MEASUREMENT
+_CONNECTION_CLOSED="client_connection_closed",c.CLIENT_METRIC_MEASUREMENT_CONNECTION_ESTABLISHED="c
+lient_connection_established",c.CLIENT_METRIC_MEASUREMENT_CONNECTION_MILESTONE="client_connection_m
+ilestone",c.CLIENT_METRIC_MEASUREMENT_CONNECTION_MILESTONES="client_connection_milestones",c.CLIENT
+_METRIC_MEASUREMENT_SESSION_ATTEMPT="client_session_attempt",c.CLIENT_METRIC_MEASUREMENT_SESSION_SU
+CCESS="client_session_success",c.CLIENT_METRIC_MEASUREMENT_ICE_RESTART="client_ice_restart",c.CLIEN
+T_METRIC_MEASUREMENT_INPUT_AUDIO_SETTINGS="client_input_audio_settings";let E=C,F=D,G=!1,H={session
+Id:null,organizationId:null,attemptCorrelationId:null},I=a=>{H=Object.assign(Object.assign({},H),a)
+},J=(a,b,c)=>B(void 0,void 0,void 0,function*(){yield K([{name:a,value:b,tags:c}])}),K=a=>B(void 
+0,void 0,void 0,function*(){if(!G&&0!==a.length)try{let 
+c,d=`${F}/metrics/client`,e={"Content-Type":"application/json"};(null==b?void 
+0:b.enabled)&&(null==b?void 
+0:b.baseUrl)?(c=`${b.baseUrl}${d}`,e["X-Anam-Target-Url"]=`${E}${d}`):c=`${E}${d}`;let 
+f=a.map(a=>{var b;return 
+Object.assign(Object.assign({},a),{clientTimestamp:null!=(b=a.clientTimestamp)?b:new 
+Date().toISOString(),tags:L(a.tags)})});for(let a=0;a<f.length;a+=50){let 
+b=f.slice(a,a+50),d=1===b.length?b[0]:{metrics:b};yield 
+fetch(c,{method:"POST",headers:e,body:JSON.stringify(d)})}}catch(a){console.error("Failed to send 
+client metric:",a)}}),L=a=>{let b=Object.assign(Object.assign({},A),a);return H.sessionId&&void 
+0===b.sessionId&&(b.sessionId=H.sessionId),H.organizationId&&void 
+0===b.organizationId&&(b.organizationId=H.organizationId),H.attemptCorrelationId&&void 0===b.attemp
+tCorrelationId&&(b.attemptCorrelationId=H.attemptCorrelationId),b};(d=n||(n={})).CLIENT_ERROR_CODE_
+USAGE_LIMIT_REACHED="CLIENT_ERROR_CODE_USAGE_LIMIT_REACHED",d.CLIENT_ERROR_CODE_SPEND_CAP_REACHED="
+CLIENT_ERROR_CODE_SPEND_CAP_REACHED",d.CLIENT_ERROR_CODE_VALIDATION_ERROR="CLIENT_ERROR_CODE_VALIDA
+TION_ERROR",d.CLIENT_ERROR_CODE_AUTHENTICATION_ERROR="CLIENT_ERROR_CODE_AUTHENTICATION_ERROR",d.CLI
+ENT_ERROR_CODE_SERVER_ERROR="CLIENT_ERROR_CODE_SERVER_ERROR",d.CLIENT_ERROR_CODE_MAX_CONCURRENT_SES
+SIONS_REACHED="CLIENT_ERROR_CODE_MAX_CONCURRENT_SESSIONS_REACHED",d.CLIENT_ERROR_CODE_SERVICE_BUSY=
+"CLIENT_ERROR_CODE_SERVICE_BUSY",d.CLIENT_ERROR_CODE_NO_PLAN_FOUND="CLIENT_ERROR_CODE_NO_PLAN_FOUND
+",d.CLIENT_ERROR_CODE_UNKNOWN_ERROR="CLIENT_ERROR_CODE_UNKNOWN_ERROR",d.CLIENT_ERROR_CODE_CONFIGURA
+TION_ERROR="CLIENT_ERROR_CODE_CONFIGURATION_ERROR";class M extends Error{constructor(a,b,c=500,d){s
+uper(a),this.name="ClientError",this.code=b,this.statusCode=c,this.details=d,Object.setPrototypeOf(
+this,M.prototype),J(m.CLIENT_METRIC_MEASUREMENT_ERROR,b,{details:d,statusCode:c})}}class 
+N{constructor(a={}){var b,c,d,e;this.milestones=[],this.context={sessionId:null,organizationId:null
+,attemptCorrelationId:null},this.published=!1,this.sessionSuccessful=!1,this.now=null!=(b=a.now)?b:
+O,this.attemptStartedAtMs=this.now(),this.sampleRatio=P(null!=(c=a.connectionMilestoneSampleRatio)?
+c:0),this.slowConnectionThresholdMs=Math.max(0,Q(a.slowConnectionThresholdMs,5e3)),this.sampled=(nu
+ll!=(d=a.random)?d:Math.random)()<this.sampleRatio,this.updateContext(null!=(e=a.context)?e:{}),thi
+s.record("client_session_attempt")}updateContext(a){this.context=Object.assign(Object.assign({},thi
+s.context),a)}record(a,b){if(this.published)return;let 
+c=R(b),d={name:a,elapsedMs:this.elapsedMs(),clientTimestamp:new Date().toISOString()};Object.keys(c
+).length>0&&(d.tags=c),this.milestones.push(d)}recordSessionSuccess(a){this.sessionSuccessful||(thi
+s.sessionSuccessful=!0,this.record("client_session_success",a),this.publishIfNeeded(),this.finalize
+())}finalize(){this.published=!0,this.milestones.length=0}publishFailure(a){this.sessionSuccessful|
+|this.published||(this.record("connection_attempt_failed",a),this.publish("failed",a))}publishIfNee
+ded(){if(!this.published){if(this.elapsedMs()>=this.slowConnectionThresholdMs)return void this.publ
+ish("slow");this.sampled&&this.publish("sampled")}}publish(a,b){if(this.published||0===this.milesto
+nes.length)return;this.published=!0;let c=S(Object.assign(Object.assign(Object.assign({},b),this.co
+ntext),{publishReason:a,attemptDurationMs:this.elapsedMs(),milestoneCount:this.milestones.length,co
+nnectionMilestoneSampleRatio:this.sampleRatio,slowConnectionThresholdMs:this.slowConnectionThreshol
+dMs,wasSampled:+!!this.sampled}));K([{name:m.CLIENT_METRIC_MEASUREMENT_CONNECTION_MILESTONES,value:
+"1",tags:c},...this.milestones.map((b,c)=>({name:m.CLIENT_METRIC_MEASUREMENT_CONNECTION_MILESTONE,v
+alue:b.elapsedMs,clientTimestamp:b.clientTimestamp,tags:S(Object.assign(Object.assign(Object.assign
+({},this.context),{publishReason:a,milestone:b.name,sequence:c}),b.tags))}))])}elapsedMs(){return 
+Math.max(0,Math.round(this.now()-this.attemptStartedAtMs))}}let O=()=>"u">typeof performance?perfor
+mance.now():Date.now(),P=a=>Math.min(1,Math.max(0,Q(a,0))),Q=(a,b)=>"number"==typeof 
+a&&Number.isFinite(a)?a:b,R=a=>{if(!a)return{};let b={};return 
+Object.entries(a).forEach(([a,c])=>{null==c||("number"!=typeof 
+c||Number.isFinite(c))&&(b[a]=c)}),b},S=a=>{let b={};return 
+Object.entries(R(a)).forEach(([a,c])=>{b[a]="boolean"==typeof c?String(c):c}),b};(e=o||(o={})).OFFE
+R="offer",e.ANSWER="answer",e.ICE_CANDIDATE="icecandidate",e.END_SESSION="endsession",e.HEARTBEAT="
+heartbeat",e.WARNING="warning",e.TALK_STREAM_INTERRUPTED="talkinputstreaminterrupted",e.TALK_STREAM
+_INPUT="talkstream",e.SESSION_READY="sessionready",e.AGENT_AUDIO_INPUT="agentaudioinput",e.AGENT_AU
+DIO_INPUT_END="agentaudioinputend",(f=p||(p={})).SPEECH_TEXT="speechText",f.CLIENT_TOOL_EVENT="clie
+ntToolEvent",f.TOOL_CALL_STARTED_EVENT="toolCallStarted",f.TOOL_CALL_COMPLETED_EVENT="toolCallCompl
+eted",f.TOOL_CALL_FAILED_EVENT="toolCallFailed",f.REASONING_TEXT="reasoningText",f.USER_SPEECH_STAR
+TED="userSpeechStarted",f.USER_SPEECH_ENDED="userSpeechEnded",f.DIRECTOR_NOTE_CUE_APPLIED="director
+NoteCueApplied",f.PERSONA_CONFIG_UPDATE_APPLIED="personaConfigUpdateApplied",(g=q||(q={})).PENDING=
+"pending",g.GRANTED="granted",g.DENIED="denied",g.NOT_REQUESTED="not_requested",(h=r||(r={})).USER=
+"user",h.PERSONA="persona",(i=s||(s={})).MESSAGE_HISTORY_UPDATED="MESSAGE_HISTORY_UPDATED",i.MESSAG
+E_STREAM_EVENT_RECEIVED="MESSAGE_STREAM_EVENT_RECEIVED",i.CONNECTION_ESTABLISHED="CONNECTION_ESTABL
+ISHED",i.DATA_CHANNEL_OPEN="DATA_CHANNEL_OPEN",i.CONNECTION_CLOSED="CONNECTION_CLOSED",i.INPUT_AUDI
+O_STREAM_STARTED="INPUT_AUDIO_STREAM_STARTED",i.VIDEO_STREAM_STARTED="VIDEO_STREAM_STARTED",i.VIDEO
+_PLAY_STARTED="VIDEO_PLAY_STARTED",i.AUDIO_STREAM_STARTED="AUDIO_STREAM_STARTED",i.TALK_STREAM_INTE
+RRUPTED="TALK_STREAM_INTERRUPTED",i.SESSION_READY="SESSION_READY",i.SERVER_WARNING="SERVER_WARNING"
+,i.MIC_PERMISSION_PENDING="MIC_PERMISSION_PENDING",i.MIC_PERMISSION_GRANTED="MIC_PERMISSION_GRANTED
+",i.MIC_PERMISSION_DENIED="MIC_PERMISSION_DENIED",i.INPUT_AUDIO_DEVICE_CHANGED="INPUT_AUDIO_DEVICE_
+CHANGED",i.CLIENT_TOOL_EVENT_RECEIVED="CLIENT_TOOL_EVENT_RECEIVED",i.TOOL_CALL_STARTED="TOOL_CALL_S
+TARTED",i.TOOL_CALL_COMPLETED="TOOL_CALL_COMPLETED",i.TOOL_CALL_FAILED="TOOL_CALL_FAILED",i.REASONI
+NG_HISTORY_UPDATED="REASONING_HISTORY_UPDATED",i.REASONING_STREAM_EVENT_RECEIVED="REASONING_STREAM_
+EVENT_RECEIVED",i.USER_SPEECH_STARTED="USER_SPEECH_STARTED",i.USER_SPEECH_ENDED="USER_SPEECH_ENDED"
+,i.DIRECTOR_NOTE_CUE_APPLIED="DIRECTOR_NOTE_CUE_APPLIED",i.PERSONA_CONFIG_UPDATE_APPLIED="PERSONA_C
+ONFIG_UPDATE_APPLIED",(j=t||(t={})).WEB_SOCKET_OPEN="WEB_SOCKET_OPEN",j.SIGNAL_MESSAGE_RECEIVED="SI
+GNAL_MESSAGE_RECEIVED",j.WEBRTC_CHAT_MESSAGE_RECEIVED="WEBRTC_CHAT_MESSAGE_RECEIVED",j.WEBRTC_CLIEN
+T_TOOL_EVENT_RECEIVED="WEBRTC_CLIENT_TOOL_EVENT_RECEIVED",j.WEBRTC_TOOL_CALL_STARTED_EVENT_RECEIVED
+="WEBRTC_TOOL_CALL_STARTED_EVENT_RECEIVED",j.WEBRTC_TOOL_CALL_COMPLETED_EVENT_RECEIVED="WEBRTC_TOOL
+_CALL_COMPLETED_EVENT_RECEIVED",j.WEBRTC_TOOL_CALL_FAILED_EVENT_RECEIVED="WEBRTC_TOOL_CALL_FAILED_E
+VENT_RECEIVED",j.WEBRTC_REASONING_TEXT_MESSAGE_RECEIVED="WEBRTC_REASONING_TEXT_MESSAGE_RECEIVED",j.
+TOOL_CALL_RESULT_READY="TOOL_CALL_RESULT_READY",(k=u||(u={})).NORMAL="CONNECTION_CLOSED_CODE_NORMAL
+",k.MICROPHONE_PERMISSION_DENIED="CONNECTION_CLOSED_CODE_MICROPHONE_PERMISSION_DENIED",k.SIGNALLING
+_CLIENT_CONNECTION_FAILURE="CONNECTION_CLOSED_CODE_SIGNALLING_CLIENT_CONNECTION_FAILURE",k.WEBRTC_F
+AILURE="CONNECTION_CLOSED_CODE_WEBRTC_FAILURE",k.SERVER_CLOSED_CONNECTION="CONNECTION_CLOSED_CODE_S
+ERVER_CLOSED_CONNECTION";let T=Object.freeze(["happy","warm","playful","laughter","curious","suppor
+tive","concerned","sad","surprised","angry","distressed"]);var U=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};class 
+V{constructor(a,b,c,d,e,f){var g,h,i,j,k;if(this.stopSignal=!1,this.sendingBuffer=[],this.wsConnect
+ionAttempts=0,this.socket=null,this.permanentlyClosed=!1,this.iceRestartReconnectInProgress=!1,this
+.heartBeatIntervalRef=null,this.reconnectTimer=null,this.stableConnectionTimer=null,this.publicEven
+tEmitter=c,this.internalEventEmitter=d,this.apiGatewayConfig=e,this.connectionMilestones=f,!a)throw
+ Error("Signalling Client: sessionId is required");this.sessionId=a;const{heartbeatIntervalSeconds:
+l,maxWsReconnectionAttempts:m,url:n}=b;if(this.heartbeatIntervalSeconds=l||5,this.maxWsReconnection
+Attempts=m||5,!n.baseUrl)throw Error("Signalling Client: baseUrl is 
+required");if((null==(g=this.apiGatewayConfig)?void 
+0:g.enabled)&&(null==(h=this.apiGatewayConfig)?void 0:h.baseUrl)){const b=new URL(this.apiGatewayCo
+nfig.baseUrl),c=null!=(i=this.apiGatewayConfig.wsPath)?i:"/ws";b.protocol=b.protocol.replace("http"
+,"ws"),b.pathname=c,this.url=b;const 
+d=n.protocol||"https",e=`${d}://${n.baseUrl}`,f=null!=(j=n.signallingPath)?j:"/ws",g=new URL(e);g.p
+rotocol="ws"==("http"===d?"ws":"wss")?"ws:":"wss:",n.port&&(g.port=n.port),g.pathname=f,g.searchPar
+ams.append("session_id",a),this.url.searchParams.append("target_url",g.href)}else{const 
+b=n.protocol||"https",c=`${b}://${n.baseUrl}`;this.url=new URL(c),this.url.protocol="http"===n.prot
+ocol?"ws:":"wss:",n.port&&(this.url.port=n.port),this.url.pathname=null!=(k=n.signallingPath)?k:"/w
+s",this.url.searchParams.append("session_id",a)}}stop(){this.stopSignal=!0,this.closeSocket()}conne
+ct(){var a;this.clearReconnectTimer(),this.clearStableConnectionTimer(),null==(a=this.connectionMil
+estones)||a.record("websocket_connecting",{attemptNumber:this.wsConnectionAttempts+1});let b=new 
+WebSocket(this.url.href);return this.socket=b,b.onopen=()=>{this.onOpen(b)},b.onclose=a=>{this.onCl
+ose(b,a)},b.onerror=a=>{this.onError(b,a)},b}reconnectForIceRestart(){if(!this.isPermanentlyClosed(
+)){if(this.clearReconnectTimer(),this.socket){this.socket.onopen=null,this.socket.onclose=null,this
+.socket.onerror=null,this.socket.onmessage=null;try{this.socket.close()}catch(a){console.warn("Sign
+allingClient - reconnectForIceRestart: error closing stale socket",a)}this.socket=null}this.clearHe
+artbeatInterval(),this.wsConnectionAttempts=0,this.iceRestartReconnectInProgress=!0,this.connect()}
+}endIceRestartReconnect(){this.iceRestartReconnectInProgress=!1}isConnected(){var 
+a;return(null==(a=this.socket)?void 0:a.readyState)===WebSocket.OPEN}isPermanentlyClosed(){return 
+this.permanentlyClosed||this.stopSignal}sendOffer(a){return U(this,void 0,void 0,function*(){let b=
+{connectionDescription:a,userUid:this.sessionId},c={actionType:o.OFFER,sessionId:this.sessionId,pay
+load:b};this.sendSignalMessage(c)})}sendIceCandidate(a){return U(this,void 0,void 
+0,function*(){let b={actionType:o.ICE_CANDIDATE,sessionId:this.sessionId,payload:a.toJSON()};this.s
+endSignalMessage(b)})}sendSignalMessage(a){var b;if((null==(b=this.socket)?void 0:b.readyState)===W
+ebSocket.OPEN)try{this.socket.send(JSON.stringify(a))}catch(a){console.error("SignallingClient - 
+sendSignalMessage: error sending message",a)}else 
+this.sendingBuffer.push(a)}sendTalkMessage(a){return U(this,void 0,void 0,function*(){let b={action
+Type:o.TALK_STREAM_INPUT,sessionId:this.sessionId,payload:a};this.sendSignalMessage(b)})}sendAgentA
+udioInput(a){let b={actionType:o.AGENT_AUDIO_INPUT,sessionId:this.sessionId,payload:a};this.sendSig
+nalMessage(b)}sendAgentAudioInputEnd(){let a={actionType:o.AGENT_AUDIO_INPUT_END,sessionId:this.ses
+sionId,payload:{}};this.sendSignalMessage(a)}closeSocket(){this.clearReconnectTimer(),this.clearSta
+bleConnectionTimer(),this.iceRestartReconnectInProgress=!1,this.socket&&(this.socket.close(),this.s
+ocket=null),this.clearHeartbeatInterval()}onOpen(a){return U(this,void 0,void 0,function*(){var b;i
+f(this.socket===a)try{null==(b=this.connectionMilestones)||b.record("websocket_open",{attemptNumber
+:this.wsConnectionAttempts+1}),this.scheduleStableConnectionReset(a),this.flushSendingBuffer(),a.on
+message=this.onMessage.bind(this),this.startSendingHeartBeats(),this.internalEventEmitter.emit(t.WE
+B_SOCKET_OPEN)}catch(a){console.error("SignallingClient - onOpen: error in onOpen",a),this.publicEv
+entEmitter.emit(s.CONNECTION_CLOSED,u.SIGNALLING_CLIENT_CONNECTION_FAILURE),this.permanentlyClosed=
+!0}})}clearReconnectTimer(){this.reconnectTimer&&(clearTimeout(this.reconnectTimer),this.reconnectT
+imer=null)}clearStableConnectionTimer(){this.stableConnectionTimer&&(clearTimeout(this.stableConnec
+tionTimer),this.stableConnectionTimer=null)}clearHeartbeatInterval(){this.heartBeatIntervalRef&&(cl
+earInterval(this.heartBeatIntervalRef),this.heartBeatIntervalRef=null)}scheduleStableConnectionRese
+t(a){this.clearStableConnectionTimer(),this.stableConnectionTimer=setTimeout(()=>{this.stableConnec
+tionTimer=null,this.socket===a&&a.readyState===WebSocket.OPEN&&(this.wsConnectionAttempts=0)},5e3)}
+onClose(a,b){return U(this,void 0,void 0,function*(){var c,d,e;if(this.socket!==a||(this.clearStabl
+eConnectionTimer(),this.clearHeartbeatInterval(),null==(c=this.connectionMilestones)||c.record("web
+socket_closed",{attemptNumber:this.wsConnectionAttempts+1,closeCode:null==b?void 
+0:b.code,closeReason:null==b?void 0:b.reason,wasClean:null==b?void 
+0:b.wasClean}),this.wsConnectionAttempts+=1,this.stopSignal))return;let f=this.getMaxReconnectionAt
+tempts(b);if(this.shouldRetryCloseEvent(b)&&this.wsConnectionAttempts<=f){let a=100*this.wsConnecti
+onAttempts;null==(d=this.connectionMilestones)||d.record("websocket_retry_scheduled",{attemptNumber
+:this.wsConnectionAttempts+1,delayMs:a}),this.socket=null,this.clearReconnectTimer(),this.reconnect
+Timer=setTimeout(()=>{this.reconnectTimer=null,this.connect()},a)}else this.clearReconnectTimer(),t
+his.clearHeartbeatInterval(),null==(e=this.connectionMilestones)||e.publishFailure({failureStage:"w
+ebsocket",closeCode:null==b?void 0:b.code,closeReason:null==b?void 0:b.reason}),this.publicEventEmi
+tter.emit(s.CONNECTION_CLOSED,u.SIGNALLING_CLIENT_CONNECTION_FAILURE),this.iceRestartReconnectInPro
+gress=!1,this.permanentlyClosed=!0})}getMaxReconnectionAttempts(a){return!this.iceRestartReconnectI
+nProgress||this.isApiGatewayBackendClose(a)?this.maxWsReconnectionAttempts:Math.max(this.maxWsRecon
+nectionAttempts,24)}shouldRetryCloseEvent(a){return!(this.isApiGatewayBackendClose(a)&&(null==a?voi
+d 0:a.code)===1008)}isApiGatewayBackendClose(a){var b;return(null==(b=this.apiGatewayConfig)?void 
+0:b.enabled)===!0&&"string"==typeof(null==a?void 0:a.reason)&&a.reason.startsWith("Backend 
+WebSocket")}onError(a,b){var c;this.stopSignal||this.socket!==a||(null==(c=this.connectionMilestone
+s)||c.record("websocket_error",{eventType:b.type}),console.error("SignallingClient - onError: 
+",b))}flushSendingBuffer(){let 
+a=[];this.sendingBuffer.length>0&&this.sendingBuffer.forEach(b=>{var c;(null==(c=this.socket)?void 
+0:c.readyState)===WebSocket.OPEN?this.socket.send(JSON.stringify(b)):a.push(b)}),this.sendingBuffer
+=a}onMessage(a){return U(this,void 0,void 0,function*(){let b=JSON.parse(a.data);this.internalEvent
+Emitter.emit(t.SIGNAL_MESSAGE_RECEIVED,b)})}startSendingHeartBeats(){if(!this.socket)throw 
+Error("SignallingClient - startSendingHeartBeats: socket is 
+null");this.heartBeatIntervalRef&&console.warn("SignallingClient - startSendingHeartBeats: 
+heartbeat interval already set");let a=1e3*this.heartbeatIntervalSeconds,b=JSON.stringify({actionTy
+pe:o.HEARTBEAT,sessionId:this.sessionId,payload:""});this.heartBeatIntervalRef=setInterval(()=>{var
+ a;this.stopSignal||(null==(a=this.socket)?void 
+0:a.readyState)===WebSocket.OPEN&&this.socket.send(b)},a)}}var W=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};class 
+X{constructor(a,b,c){if(!a&&!b)throw Error("Either sessionToken or apiKey must be 
+provided");this.sessionToken=a||null,this.apiKey=b||null,this.baseUrl=(null==c?void 
+0:c.baseUrl)||"https://api.anam.ai",this.apiVersion=(null==c?void 
+0:c.apiVersion)||"/v1",this.apiGatewayConfig=(null==c?void 0:c.apiGateway)||void 
+0,this.retryOptions=function(a){let b=Math.max(1,Math.floor(Y(null==a?void 
+0:a.maxAttempts,3))),c=Math.max(0,Y(null==a?void 
+0:a.initialBackoffMs,250)),d=Math.max(c,Y(null==a?void 
+0:a.maxBackoffMs,2e3));return{maxAttempts:b,initialBackoffMs:c,maxBackoffMs:d}}(null==c?void 
+0:c.retry),this.requestTimeoutMs=Math.max(0,Y(null==c?void 
+0:c.requestTimeoutMs,1e4))}buildGatewayUrlAndHeaders(a,b){var c,d;if(null==(c=this.apiGatewayConfig
+)||!c.enabled||null==(d=this.apiGatewayConfig)||!d.baseUrl)return{url:`${this.baseUrl}${a}`,headers
+:b};{let c=`${this.apiGatewayConfig.baseUrl}${a}`,d=new URL(`${this.baseUrl}${a}`);return{url:c,hea
+ders:Object.assign(Object.assign({},b),{"X-Anam-Target-Url":d.href})}}}startSession(a,b){return 
+W(this,void 0,void 0,function*(){let c;if(!this.sessionToken){if(!a)throw new M("Persona 
+configuration must be provided when using 
+apiKey",n.CLIENT_ERROR_CODE_VALIDATION_ERROR,400);this.sessionToken=yield 
+this.unsafe_getSessionToken(a)}a&&"brainType"in a&&console.warn("Warning: brainType is deprecated 
+and will be removed in a future version. Please use llmId 
+instead.");let{maxAttempts:d}=this.retryOptions;for(let f=1;f<=d;f++)try{return yield 
+this.attemptStartSession(a,b)}catch(a){var e;if(c=a,f>=d||!(!((e=a)instanceof 
+M)||e.statusCode>=500&&e.statusCode<600))throw a;yield function(a){return new 
+Promise(b=>setTimeout(b,a))}(this.computeBackoffDelay(f))}throw 
+c})}attemptStartSession(a,b){return W(this,void 0,void 0,function*(){let 
+c=this.requestTimeoutMs>0?new AbortController:void 0,d=void 
+0!==c?setTimeout(()=>c.abort(),this.requestTimeoutMs):void 0;try{let d=`${this.apiVersion}/engine/s
+ession`,{url:e,headers:f}=this.buildGatewayUrlAndHeaders(d,{"Content-Type":"application/json",Autho
+rization:`Bearer ${this.sessionToken}`}),g=yield fetch(e,{method:"POST",headers:f,body:JSON.stringi
+fy({personaConfig:a,sessionOptions:b,clientMetadata:A}),signal:null==c?void 0:c.signal}),h=yield 
+g.json(),i=h.error;switch(g.status){case 200:case 201:return h;case 400:throw new M("Invalid 
+request to start session",n.CLIENT_ERROR_CODE_VALIDATION_ERROR,400,{cause:h.message});case 
+401:throw new M("Authentication failed when starting 
+session",n.CLIENT_ERROR_CODE_AUTHENTICATION_ERROR,401,{cause:h.message});case 402:throw new 
+M("Please sign up for a plan to start a 
+session",n.CLIENT_ERROR_CODE_NO_PLAN_FOUND,402,{cause:h.message});case 403:throw new 
+M("Authentication failed when starting 
+session",n.CLIENT_ERROR_CODE_AUTHENTICATION_ERROR,403,{cause:h.message});case 429:if("Concurrent 
+session limit reached"===i)throw new M("Concurrency limit reached, please upgrade your 
+plan",n.CLIENT_ERROR_CODE_MAX_CONCURRENT_SESSIONS_REACHED,429,{cause:h.message});if("Spend cap 
+reached"===i)throw new M("Spend cap reached, please upgrade your 
+plan",n.CLIENT_ERROR_CODE_SPEND_CAP_REACHED,429,{cause:h.message});throw new M("Usage limit 
+reached, please upgrade your 
+plan",n.CLIENT_ERROR_CODE_USAGE_LIMIT_REACHED,429,{cause:h.message});case 503:throw new M("There 
+are no available personas, please try again 
+later",n.CLIENT_ERROR_CODE_SERVICE_BUSY,503,{cause:h.message});default:throw new M("Unknown error 
+when starting session",n.CLIENT_ERROR_CODE_SERVER_ERROR,g.status,{cause:h.message})}}catch(a){if(a 
+instanceof M)throw a;throw new M("Failed to start 
+session",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:a instanceof 
+Error?a.message:String(a)})}finally{void 0!==d&&clearTimeout(d)}})}computeBackoffDelay(a){let{initi
+alBackoffMs:b,maxBackoffMs:c}=this.retryOptions,d=Math.min(c,b*Math.pow(2,a-1));return 
+Math.floor(d/2+d/2*Math.random())}unsafe_getSessionToken(a){return W(this,void 0,void 
+0,function*(){if(console.warn("Using an insecure method. This method should not be used in 
+production."),!this.apiKey)throw Error("No apiKey provided");a&&"brainType"in 
+a&&console.warn("Warning: brainType is deprecated and will be removed in a future version. Please 
+use llmId instead.");try{let b=`${this.apiVersion}/auth/session-token`,{url:c,headers:d}=this.build
+GatewayUrlAndHeaders(b,{"Content-Type":"application/json",Authorization:`Bearer 
+${this.apiKey}`}),e=yield fetch(c,{method:"POST",headers:d,body:JSON.stringify({clientLabel:"js-sdk
+-api-key",personaConfig:a})}),f={};try{let a=yield e.json();a&&"object"==typeof 
+a&&(f=a)}catch(a){}if(!e.ok){let a=401===e.status||403===e.status,b="string"==typeof 
+f.message?f.message:"string"==typeof f.error?f.error:`Request failed with HTTP status 
+${e.status}`,c=new M("Failed to get session token",a?n.CLIENT_ERROR_CODE_AUTHENTICATION_ERROR:e.sta
+tus>=400&&e.status<500?n.CLIENT_ERROR_CODE_VALIDATION_ERROR:n.CLIENT_ERROR_CODE_SERVER_ERROR,e.stat
+us,{cause:b});throw c.details={cause:b,responseBody:f},c}if("string"!=typeof 
+f.sessionToken||!f.sessionToken)throw new M("Failed to get session 
+token",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:"Response did not include a session 
+token"});return f.sessionToken}catch(a){if(a instanceof M)throw a;throw new M("Failed to get 
+session token",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:a instanceof 
+Error?a.message:String(a)})}})}getApiUrl(){return`${this.baseUrl}${this.apiVersion}`}}function 
+Y(a,b){return"number"==typeof a&&Number.isFinite(a)?a:b}class Z{constructor(a,b,c){this.baseUrl=a,t
+his.sessionId=b,this.apiGatewayConfig=c}sendTalkCommand(a){var b,c,d,e;return b=this,c=void 
+0,d=void 0,e=function*(){var b,c;try{let d,e={"Content-Type":"application/json"},f="/talk",g=`?sess
+ion_id=${this.sessionId}`;if((null==(b=this.apiGatewayConfig)?void 
+0:b.enabled)&&(null==(c=this.apiGatewayConfig)?void 
+0:c.baseUrl)){d=`${this.apiGatewayConfig.baseUrl}${f}${g}`;let a=new 
+URL(`${this.baseUrl}${f}${g}`);e["X-Anam-Target-Url"]=a.href}else d=`${this.baseUrl}${f}${g}`;let 
+h=yield fetch(d,{method:"POST",headers:e,body:JSON.stringify({content:a})});if(!h.ok)throw 
+Error(`Failed to send talk command: ${h.status} ${h.statusText}`)}catch(a){throw 
+console.error(a),Error("EngineApiRestClient - sendTalkCommand: Failed to send talk 
+command")}},new(d||(d=Promise))(function(a,f){function 
+g(a){try{i(e.next(a))}catch(a){f(a)}}function h(a){try{i(e.throw(a))}catch(a){f(a)}}function 
+i(b){var c;b.done?a(b.value):((c=b.value)instanceof d?c:new 
+d(function(a){a(c)})).then(g,h)}i((e=e.apply(b,c||[])).next())})}}class 
+${constructor(a,b){this.messages=[],this.publishedUtterances=new WeakSet,this.publicEventEmitter=a,
+this.internalEventEmitter=b,this.internalEventEmitter.addListener(t.WEBRTC_CHAT_MESSAGE_RECEIVED,th
+is.processWebRtcTextMessageEvent.bind(this))}webRtcTextMessageEventToMessageStreamEvent(a){var 
+b;let c=null!=(b=a.user_action_correlation_id)?b:a.correlationId;return Object.assign(Object.assign
+(Object.assign({id:`${a.role}::${a.message_id}`,content:a.content,role:a.role,endOfSpeech:a.end_of_
+speech,interrupted:a.interrupted,contentIndex:a.content_index},a.utterance_id?{utteranceId:a.uttera
+nce_id}:{}),c?{correlationId:c}:{}),a.cue_tag?{cueTag:a.cue_tag}:{})}processUserMessage(a){let b={i
+d:a.id,content:a.content,role:a.role};this.messages.push(b)}appendUtterance(a,b){if(!b.utteranceId)
+return a;let c=!!a&&this.publishedUtterances.has(a),d=c?[...a]:null!=a?a:[],e=d[d.length-1];if(e&&e
+.id===b.utteranceId){let a=c?Object.assign({},e):e;return 
+a.content+=b.content,d[d.length-1]=a,d}let f=d.length>0&&b.content.startsWith(" 
+")?b.content.slice(1):b.content;return 
+d.push({id:b.utteranceId,content:f}),d}processPersonaMessage(a){let b={id:a.id,content:a.content,ro
+le:a.role,interrupted:a.interrupted},c=this.messages.findIndex(a=>a.id===b.id);if(-1!==c){let d=thi
+s.messages[c],e=this.appendUtterance(d.utterances,a);this.messages[c]=Object.assign(Object.assign(O
+bject.assign({},d),{content:d.content+b.content,interrupted:d.interrupted||b.interrupted}),e?{utter
+ances:e}:{})}else{let c=this.appendUtterance(void 0,a);this.messages.push(Object.assign(Object.assi
+gn({},b),c?{utterances:c}:{}))}}processWebRtcTextMessageEvent(a){let b=this.webRtcTextMessageEventT
+oMessageStreamEvent(a);switch(this.publicEventEmitter.emit(s.MESSAGE_STREAM_EVENT_RECEIVED,b),b.rol
+e){case r.USER:this.processUserMessage(b);break;case r.PERSONA:this.processPersonaMessage(b)}b.endO
+fSpeech&&(this.messages.forEach(a=>{a.utterances&&this.publishedUtterances.add(a.utterances)}),this
+.publicEventEmitter.emit(s.MESSAGE_HISTORY_UPDATED,this.messages))}}class 
+_{constructor(){this.listeners={}}addListener(a,b){this.listeners[a]||(this.listeners[a]=new Set),t
+his.listeners[a].add(b)}removeListener(a,b){this.listeners[a]&&this.listeners[a].delete(b)}emit(a,.
+..b){if(a===s.CONNECTION_ESTABLISHED&&J(m.CLIENT_METRIC_MEASUREMENT_CONNECTION_ESTABLISHED,"1"),a==
+=s.CONNECTION_CLOSED){let[a,c]=b;J(m.CLIENT_METRIC_MEASUREMENT_CONNECTION_CLOSED,a,c?{details:c}:vo
+id 0)}this.listeners[a]&&this.listeners[a].forEach(a=>{a(...b)})}}let aa=a=>{let b={echoCancellatio
+n:!0,noiseSuppression:!0,autoGainControl:!0,voiceIsolation:!0,channelCount:{ideal:1}};return 
+a&&(b.deviceId={exact:a}),b},ab=a=>!0===a?"true":!1===a?"false":"unreported";class ac{constructor(a
+,b){this.sequenceNumber=0,this.config=a,this.signallingClient=b}sendAudioChunk(a){let 
+b={audioData:"string"==typeof a?a:this.arrayBufferToBase64(a),encoding:this.config.encoding,sampleR
+ate:this.config.sampleRate,channels:this.config.channels,sequenceNumber:this.sequenceNumber++};this
+.signallingClient.sendAgentAudioInput(b)}endSequence(){this.signallingClient.sendAgentAudioInputEnd
+(),this.sequenceNumber=0}getSequenceNumber(){return this.sequenceNumber}getConfig(){return 
+this.config}arrayBufferToBase64(a){return btoa(Array.from(a instanceof Uint8Array?a:new Uint8Array(
+a),a=>String.fromCharCode(a)).join(""))}}(l=v||(v={}))[l.UNSTARTED=0]="UNSTARTED",l[l.STREAMING=1]=
+"STREAMING",l[l.INTERRUPTED=2]="INTERRUPTED",l[l.ENDED=3]="ENDED";var ad=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};let 
+ae=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;class af{constructor(a,b
+,c){this.state=v.UNSTARTED,this.correlationId=a,this.internalEventEmitter=b,this.signallingClient=c
+,this.internalEventEmitter.addListener(t.SIGNAL_MESSAGE_RECEIVED,this.onSignalMessage.bind(this))}o
+nDeactivate(){this.internalEventEmitter.removeListener(t.SIGNAL_MESSAGE_RECEIVED,this.onSignalMessa
+ge.bind(this))}onSignalMessage(a){return ad(this,void 0,void 0,function*(){a.actionType===o.TALK_ST
+REAM_INTERRUPTED&&a.payload.correlationId===this.correlationId&&(this.state=v.INTERRUPTED,this.onDe
+activate())})}endMessage(){return ad(this,void 0,void 0,function*(){if(this.state===v.ENDED)return 
+void console.warn("Talk stream is already ended via end of speech. No need to call 
+endMessage.");if(this.state!==v.STREAMING)return void console.warn("Talk stream is not in an 
+active state: "+this.state);let a=Object.assign({content:"",startOfSpeech:!1,endOfSpeech:!0,correla
+tionId:this.correlationId},null!=this.lastUtteranceId?{utteranceId:this.lastUtteranceId}:{});yield 
+this.signallingClient.sendTalkMessage(a),this.state=v.ENDED,this.onDeactivate()})}streamMessageChun
+k(a,b,c){return ad(this,void 0,void 
+0,function*(){if(this.state!==v.STREAMING&&this.state!==v.UNSTARTED)throw Error("Talk stream is 
+not in an active state: "+this.state);if(null!=c&&!ae.test(c))throw Error("utteranceId must be a 
+lowercase UUID v4 string, got: "+c);let d=Object.assign({content:a,startOfSpeech:this.state===v.UNS
+TARTED,endOfSpeech:b,correlationId:this.correlationId},null!=c?{utteranceId:c}:{});null!=c&&(this.l
+astUtteranceId=c),this.state=b?v.ENDED:v.STREAMING,this.state===v.ENDED&&this.onDeactivate(),yield 
+this.signallingClient.sendTalkMessage(d)})}getCorrelationId(){return 
+this.correlationId}isActive(){return 
+this.state===v.STREAMING||this.state===v.UNSTARTED}getState(){return this.state}}var 
+ag=function(a,b,c,d){return new(c||(c=Promise))(function(e,f){function 
+g(a){try{i(d.next(a))}catch(a){f(a)}}function h(a){try{i(d.throw(a))}catch(a){f(a)}}function 
+i(a){var b;a.done?e(a.value):((b=a.value)instanceof c?b:new 
+c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};let 
+ah=(a,b)=>{if(isNaN(a)||isNaN(b))return 0;let c=b-a;return c>0?c:0};class ai{constructor(a,b){this.
+handlers=Object.create(null),this.pendingCalls=Object.create(null),this.failedCalls=Object.create(n
+ull),this.activeSessionId=null,this.publicEventEmitter=a,this.internalEventEmitter=b}setActiveSessi
+on(a){this.activeSessionId=a,this.clearPendingCalls(),this.clearFailedCalls()}clearSessionState(){t
+his.activeSessionId=null,this.clearPendingCalls(),this.clearFailedCalls()}clearPendingCalls(){this.
+pendingCalls=Object.create(null)}clearFailedCalls(){this.failedCalls=Object.create(null)}registerHa
+ndler(a,b){return this.handlers[a]=b,()=>{delete 
+this.handlers[a]}}processToolCallStartedEvent(a){return ag(this,void 0,void 0,function*(){if(this.a
+ctiveSessionId!==a.session_id)return;let{tool_name:b,timestamp:c}=a,d=this.WebRTCToolCallStartedEve
+ntToToolCallStartedPayload(a),e=new 
+Date(c);if(this.pendingCalls[a.tool_call_id]={payload:d,timestamp:e.getTime()},!(b in 
+this.handlers))return;let f=this.handlers[b];if(f.onStart)try{let b=yield f.onStart(d);if("client"=
+==a.tool_type){this.sendToolResult({sessionId:a.session_id,toolCallId:a.tool_call_id,userActionCorr
+elationId:a.user_action_correlation_id,timestampUserAction:a.timestamp_user_action,result:null!=b?b
+:void 0,errorMessage:void 0}),yield 
+this.processToolCallCompletedEvent(Object.assign(Object.assign({},a),{result:b,timestamp:new 
+Date().toISOString()}));return}}catch(c){let b=c instanceof Error?c.message:String(c);"client"===a.
+tool_type&&this.sendToolResult({sessionId:a.session_id,toolCallId:a.tool_call_id,userActionCorrelat
+ionId:a.user_action_correlation_id,timestampUserAction:a.timestamp_user_action,result:void 
+0,errorMessage:`Error in handler: ${b}`}),yield 
+this.processToolCallFailedEvent(Object.assign(Object.assign({},a),{error_message:`Error in onStart 
+handler: ${b}`,timestamp:new 
+Date().toISOString()}));return}})}processToolCallCompletedEvent(a){return ag(this,void 0,void 
+0,function*(){let{tool_name:b,tool_call_id:c}=a;if(this.activeSessionId!==a.session_id)return;if(c 
+in this.failedCalls)return void delete this.failedCalls[c];let 
+d=this.webRTCToolCallCompletedEventToToolCallCompletedPayload(a);if(c in this.pendingCalls&&delete 
+this.pendingCalls[c],!(b in this.handlers))return;let e=this.handlers[b];if(e.onComplete){"client"=
+==a.tool_type&&this.publicEventEmitter.emit(s.TOOL_CALL_COMPLETED,d);try{yield 
+e.onComplete(d)}catch(a){console.error(`Error in onComplete handler for tool 
+${b}:`,a);return}}})}processToolCallFailedEvent(a){return ag(this,void 0,void 
+0,function*(){let{tool_name:b,tool_call_id:c}=a;if(this.activeSessionId!==a.session_id)return;let 
+d=this.webRTCToolCallFailedEventToToolCallFailedPayload(a);if(this.failedCalls[c]=d,c in 
+this.pendingCalls&&delete this.pendingCalls[c],!(b in this.handlers))return;let e=this.handlers[b];
+if(e.onFail){"client"===a.tool_type&&this.publicEventEmitter.emit(s.TOOL_CALL_FAILED,d);try{yield 
+e.onFail(d)}catch(a){console.error(`Error in onFail handler for tool 
+${b}:`,a);return}}})}sendToolResult(a){let b={sessionId:a.sessionId,toolCallId:a.toolCallId,result:
+a.result,errorMessage:a.errorMessage,userActionCorrelationId:a.userActionCorrelationId,timestampUse
+rAction:a.timestampUserAction};this.internalEventEmitter.emit(t.TOOL_CALL_RESULT_READY,b)}static We
+bRTCClientToolEventToClientToolEvent(a){return{eventUid:a.event_uid,sessionId:a.session_id,eventNam
+e:a.event_name,eventData:a.event_data,timestamp:a.timestamp,timestampUserAction:a.timestamp_user_ac
+tion,userActionCorrelationId:a.user_action_correlation_id}}static WebRTCToolCallStartedEventToClien
+tToolEvent(a){return{eventUid:a.event_uid,sessionId:a.session_id,eventName:a.tool_name,eventData:a.
+arguments,timestamp:a.timestamp,timestampUserAction:a.timestamp_user_action,userActionCorrelationId
+:a.user_action_correlation_id}}WebRTCToolCallStartedEventToToolCallStartedPayload(a){return{eventUi
+d:a.event_uid,sessionId:a.session_id,toolCallId:a.tool_call_id,toolName:a.tool_name,toolType:a.tool
+_type,toolSubtype:a.tool_subtype,arguments:a.arguments,timestamp:a.timestamp,timestampUserAction:a.
+timestamp_user_action,userActionCorrelationId:a.user_action_correlation_id}}webRTCToolCallCompleted
+EventToToolCallCompletedPayload(a){let b=new Date(a.timestamp),c=this.pendingCalls[a.tool_call_id],
+d=c?ah(c.timestamp,b.getTime()):0;return{eventUid:a.event_uid,sessionId:a.session_id,toolCallId:a.t
+ool_call_id,toolName:a.tool_name,toolType:a.tool_type,toolSubtype:a.tool_subtype,result:a.result,ex
+ecutionTime:d>0?d:0,timestamp:a.timestamp,documentsAccessed:a.documents_accessed,timestampUserActio
+n:a.timestamp_user_action,userActionCorrelationId:a.user_action_correlation_id}}webRTCToolCallFaile
+dEventToToolCallFailedPayload(a){let b=new Date(a.timestamp),c=this.pendingCalls[a.tool_call_id],d=
+c?ah(c.timestamp,b.getTime()):0;return{eventUid:a.event_uid,sessionId:a.session_id,toolCallId:a.too
+l_call_id,toolName:a.tool_name,toolType:a.tool_type,toolSubtype:a.tool_subtype,errorMessage:a.error
+_message,executionTime:d>0?d:0,timestamp:a.timestamp,timestampUserAction:a.timestamp_user_action,us
+erActionCorrelationId:a.user_action_correlation_id}}}var aj=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};class 
+ak{constructor(a,b,c,d,e,f){var g,h,i,j;this.peerConnection=null,this.connectionEstablishedEmitted=
+!1,this.iceRestartInProgress=!1,this.iceRestartAttempts=0,this.iceRestartAwaitedAnswer=!1,this.iceR
+estartEpisodeStartMs=null,this.iceRestartEpisodeTrigger=null,this.iceRestartStopped=!1,this.iceDisc
+onnectedGraceTimer=null,this.iceRestartWatchdogTimer=null,this.pendingWsOpenListener=null,this.pend
+ingWsOpenTimeout=null,this.pendingWsOpenReject=null,this.connectionReceivedAnswer=!1,this.remoteIce
+CandidateBuffer=[],this.iceRestartCandidateBuffer=null,this.inputAudioStream=null,this.dataChannel=
+null,this.videoElement=null,this.videoStream=null,this.audioStream=null,this.inputAudioState={isMut
+ed:!1,permissionState:q.NOT_REQUESTED},this.successMetricPoller=null,this.successMetricFired=!1,thi
+s.showPeerConnectionStatsReport=!1,this.peerConnectionStatsReportOutputFormat="console",this.statsC
+ollectionInterval=null,this.agentAudioInputStream=null,this.firstLocalIceCandidateSent=!1,this.firs
+tRemoteIceCandidateReceived=!1,this.firstRemoteIceCandidateApplied=!1,this.connectionEstablishedMil
+estoneRecorded=!1,this.publicEventEmitter=c,this.internalEventEmitter=d,this.toolCallManager=e,this
+.connectionMilestones=f,this.apiGatewayConfig=b.apiGateway;const{inputAudio:k}=b;this.inputAudioSta
+te=k.inputAudioState,b.inputAudio.userProvidedMediaStream&&(this.inputAudioStream=b.inputAudio.user
+ProvidedMediaStream),this.disableInputAudio=!0===b.inputAudio.disableInputAudio,this.internalEventE
+mitter.addListener(t.WEB_SOCKET_OPEN,this.onSignallingClientConnected.bind(this)),this.internalEven
+tEmitter.addListener(t.SIGNAL_MESSAGE_RECEIVED,this.onSignalMessage.bind(this)),this.internalEventE
+mitter.addListener(t.WEBRTC_TOOL_CALL_STARTED_EVENT_RECEIVED,this.toolCallManager.processToolCallSt
+artedEvent.bind(this.toolCallManager)),this.internalEventEmitter.addListener(t.WEBRTC_TOOL_CALL_COM
+PLETED_EVENT_RECEIVED,this.toolCallManager.processToolCallCompletedEvent.bind(this.toolCallManager)
+),this.internalEventEmitter.addListener(t.WEBRTC_TOOL_CALL_FAILED_EVENT_RECEIVED,this.toolCallManag
+er.processToolCallFailedEvent.bind(this.toolCallManager)),this.internalEventEmitter.addListener(t.T
+OOL_CALL_RESULT_READY,this.onToolCallResultReceived.bind(this)),this.iceServers=b.iceServers,this.i
+ceTransportPolicy=b.iceTransportPolicy,this.rtcConfiguration=b.rtcConfiguration,this.signallingClie
+nt=new V(a,b.signalling,this.publicEventEmitter,this.internalEventEmitter,this.apiGatewayConfig,thi
+s.connectionMilestones),this.engineApiRestClient=new Z(b.engine.baseUrl,a,this.apiGatewayConfig),th
+is.audioDeviceId=b.inputAudio.audioDeviceId,this.showPeerConnectionStatsReport=null!=(h=null==(g=b.
+metrics)?void 0:g.showPeerConnectionStatsReport)&&h,this.peerConnectionStatsReportOutputFormat=null
+!=(j=null==(i=b.metrics)?void 0:i.peerConnectionStatsReportOutputFormat)?j:"console"}onInputAudioSt
+ateChange(a,b){a.isMuted!==b.isMuted&&(b.isMuted?this.muteAllAudioTracks():this.unmuteAllAudioTrack
+s())}muteAllAudioTracks(){var a;null==(a=this.inputAudioStream)||a.getAudioTracks().forEach(a=>{a.e
+nabled=!1})}unmuteAllAudioTracks(){var a;null==(a=this.inputAudioStream)||a.getAudioTracks().forEac
+h(a=>{a.enabled=!0})}startStatsCollection(){this.statsCollectionInterval||(this.statsCollectionInte
+rval=setInterval(()=>aj(this,void 0,void 0,function*(){if(this.peerConnection&&this.dataChannel&&"o
+pen"===this.dataChannel.readyState)try{let a=yield 
+this.peerConnection.getStats();this.sendClientSideMetrics(a)}catch(a){console.error("Failed to 
+collect and send stats:",a)}}),5e3))}sendClientSideMetrics(a){a.forEach(a=>{"inbound-rtp"===a.type&
+&this.dataChannel&&"open"===this.dataChannel.readyState&&this.dataChannel.send(JSON.stringify({mess
+age_type:"remote_rtp_stats",data:a}))})}recordSessionSuccess(a){var b,c;this.successMetricFired||(t
+his.successMetricFired=!0,null==(b=this.connectionMilestones)||b.record("first_video_frame",{detect
+ionMethod:a}),null==(c=this.connectionMilestones)||c.recordSessionSuccess({detectionMethod:a}),J(m.
+CLIENT_METRIC_MEASUREMENT_SESSION_SUCCESS,"1",{detectionMethod:a}))}startSuccessMetricPolling(){if(
+this.successMetricPoller||this.successMetricFired)return;let a=setTimeout(()=>{var a,b;this.success
+MetricPoller&&(null==(a=this.connectionMilestones)||a.record("first_video_frame_timeout",{timeoutMs
+:15e3}),null==(b=this.connectionMilestones)||b.publishFailure({failureStage:"first_video_frame",tim
+eoutMs:15e3}),console.warn("No video frames received, there is a problem with the connection."),cle
+arInterval(this.successMetricPoller),this.successMetricPoller=null)},15e3);this.successMetricPoller
+=setInterval(()=>aj(this,void 0,void 0,function*(){if(!this.peerConnection||this.successMetricFired
+){this.successMetricPoller&&clearInterval(this.successMetricPoller),clearTimeout(a);return}try{let 
+b=yield this.peerConnection.getStats(),c=!1,d=null;b.forEach(a=>{"inbound-rtp"===a.type&&"video"===
+a.kind&&(void 0!==a.framesDecoded&&a.framesDecoded>0?(c=!0,d="framesDecoded"):void 0!==a.framesRece
+ived&&a.framesReceived>0?(c=!0,d="framesReceived"):a.bytesReceived>0&&a.packetsReceived>0&&a.bytesR
+eceived>1e5&&(c=!0,d="bytesReceived"))}),c&&!this.successMetricFired&&(this.recordSessionSuccess(nu
+ll!=d?d:"unknown"),this.successMetricPoller&&clearInterval(this.successMetricPoller),clearTimeout(a
+),this.successMetricPoller=null)}catch(a){}}),500)}muteInputAudio(){let 
+a=this.inputAudioState,b=Object.assign(Object.assign({},this.inputAudioState),{isMuted:!0});return 
+this.inputAudioState=b,this.onInputAudioStateChange(a,b),this.inputAudioState}unmuteInputAudio(){le
+t 
+a=this.inputAudioState,b=Object.assign(Object.assign({},this.inputAudioState),{isMuted:!1});return 
+this.inputAudioState=b,this.onInputAudioStateChange(a,b),this.inputAudioState}getInputAudioState(){
+return this.inputAudioState}getPeerConnection(){return 
+this.peerConnection}changeAudioInputDevice(a){return aj(this,void 0,void 
+0,function*(){if(!this.peerConnection)throw Error("StreamingClient - changeAudioInputDevice: peer 
+connection is not initialized. Start streaming first.");if(!(null==a?void 0:a.trim()))throw 
+Error("StreamingClient - changeAudioInputDevice: a non-empty deviceId is required");let b=a.trim(),
+c=this.inputAudioState.isMuted;try{this.inputAudioStream&&this.inputAudioStream.getAudioTracks().fo
+rEach(a=>{a.stop()});let a=aa(b);this.inputAudioStream=yield 
+navigator.mediaDevices.getUserMedia({audio:a}),this.audioDeviceId=b,yield this.setupAudioTrack("dev
+ice_change"),c&&this.muteAllAudioTracks(),this.publicEventEmitter.emit(s.INPUT_AUDIO_DEVICE_CHANGED
+,b)}catch(a){throw console.error("Failed to change audio input device:",a),Error(`StreamingClient 
+- changeAudioInputDevice: ${a instanceof 
+Error?a.message:String(a)}`)}})}getInputAudioStream(){return 
+this.inputAudioStream}getVideoStream(){return this.videoStream}getAudioStream(){return 
+this.audioStream}onToolCallResultReceived(a){let b={session_id:a.sessionId,message_type:"tool_resul
+t",tool_call_id:a.toolCallId,user_action_correlation_id:a.userActionCorrelationId,timestamp_user_ac
+tion:a.timestampUserAction};void 0!==a.result&&(b.result=a.result),a.errorMessage&&(b.error=a.error
+Message),this.sendDataMessage(JSON.stringify(b))}sendDataMessage(a){return!!this.dataChannel&&"open
+"===this.dataChannel.readyState&&(this.dataChannel.send(a),!0)}setMediaStreamTargetById(a){if(a){le
+t b=document.getElementById(a);if(!b)throw Error(`StreamingClient: video element with id ${a} not 
+found`);this.videoElement=b}}startConnection(){var a;try{if(this.peerConnection)return void 
+console.error("StreamingClient - startConnection: peer connection already exists");this.resetAttemp
+tScopedMilestoneState(),null==(a=this.connectionMilestones)||a.record("connection_start_requested")
+,this.signallingClient.connect()}catch(a){console.error("StreamingClient - startConnection: error",
+a),this.handleWebrtcFailure(a)}}resetAttemptScopedMilestoneState(){this.firstLocalIceCandidateSent=
+!1,this.firstRemoteIceCandidateReceived=!1,this.firstRemoteIceCandidateApplied=!1,this.connectionEs
+tablishedMilestoneRecorded=!1}stopConnection(){return aj(this,void 0,void 0,function*(){yield 
+this.shutdown()})}sendTalkCommand(a){return aj(this,void 0,void 
+0,function*(){if(!this.peerConnection)throw Error("StreamingClient - sendTalkCommand: peer 
+connection is null");yield 
+this.engineApiRestClient.sendTalkCommand(a)})}startTalkMessageStream(a){return 
+a||(a=Math.random().toString(36).substring(2,15)),new 
+af(a,this.internalEventEmitter,this.signallingClient)}createAgentAudioInputStream(a){return 
+this.agentAudioInputStream=new 
+ac(a,this.signallingClient),this.agentAudioInputStream}getAgentAudioInputStream(){return 
+this.agentAudioInputStream}initPeerConnection(){return aj(this,void 0,void 0,function*(){var a,b,c,
+d,e,f,g,h,i,j;null==(a=this.connectionMilestones)||a.record("peer_connection_creating"),this.peerCo
+nnection=new RTCPeerConnection(Object.assign(Object.assign({iceCandidatePoolSize:2},this.rtcConfigu
+ration),{iceTransportPolicy:null!=(d=null!=(c=null==(b=this.rtcConfiguration)?void 
+0:b.iceTransportPolicy)?c:this.iceTransportPolicy)?d:void 0,iceServers:this.iceServers})),null==(e=
+this.connectionMilestones)||e.record("peer_connection_created",{iceCandidatePoolSize:2,iceServerCou
+nt:this.iceServers.length,iceTransportPolicy:null!=(h=null!=(g=null==(f=this.rtcConfiguration)?void
+ 0:f.iceTransportPolicy)?g:this.iceTransportPolicy)?h:"all"}),this.peerConnection.onicecandidate=th
+is.onIceCandidate.bind(this),this.peerConnection.oniceconnectionstatechange=this.onIceConnectionSta
+teChange.bind(this),this.peerConnection.onconnectionstatechange=this.onConnectionStateChange.bind(t
+his),this.peerConnection.addEventListener("track",this.onTrackEventHandler.bind(this)),yield this.s
+etupDataChannels(),this.peerConnection.addTransceiver("video",{direction:"recvonly"}),this.disableI
+nputAudio?(null==(i=this.connectionMilestones)||i.record("microphone_permission_skipped",{reason:"i
+nput_audio_disabled"}),this.peerConnection.addTransceiver("audio",{direction:"recvonly"})):(this.pe
+erConnection.addTransceiver("audio",{direction:"sendrecv"}),this.inputAudioStream?(null==(j=this.co
+nnectionMilestones)||j.record("input_audio_stream_provided",{audioTrackCount:this.inputAudioStream.
+getAudioTracks().length}),yield this.setupAudioTrack("user_provided")):this.requestMicrophonePermis
+sionAsync().catch(a=>{console.error("Async microphone permission request 
+failed:",a)}))})}onSignalMessage(a){return aj(this,void 0,void 0,function*(){var 
+b,c,d,e;if(!this.peerConnection)return void console.error("StreamingClient - onSignalMessage: 
+peerConnection is not initialized");switch(a.actionType){case 
+o.ANSWER:{null==(b=this.connectionMilestones)||b.record("answer_received");let 
+d=a.payload;if("have-local-offer"!==this.peerConnection.signalingState)break;try{yield 
+this.peerConnection.setRemoteDescription(d)}catch(a){console.error("StreamingClient - 
+setRemoteDescription(answer) failed",a),this.connectionEstablishedEmitted||this.isAwaitingRestartAn
+swer()||this.handleWebrtcFailure(a);break}null==(c=this.connectionMilestones)||c.record("remote_des
+cription_set"),this.connectionReceivedAnswer=!0,this.onAnswerAccepted(),yield 
+this.flushRemoteIceCandidateBuffer();break}case o.ICE_CANDIDATE:{let b=new RTCIceCandidate(a.payloa
+d);this.firstRemoteIceCandidateReceived||(this.firstRemoteIceCandidateReceived=!0,null==(d=this.con
+nectionMilestones)||d.record("first_remote_ice_candidate_received",al(b))),this.connectionReceivedA
+nswer?yield this.addRemoteIceCandidate(b):this.remoteIceCandidateBuffer.push(b);break}case 
+o.END_SESSION:let f=a.payload;this.sendIceRestartMetric("aborted"),null==(e=this.connectionMileston
+es)||e.publishFailure({failureStage:"server_closed_connection"}),this.publicEventEmitter.emit(s.CON
+NECTION_CLOSED,u.SERVER_CLOSED_CONNECTION,f),this.shutdown();break;case o.WARNING:let 
+g=a.payload;console.warn("Warning received from server: 
+"+g),this.publicEventEmitter.emit(s.SERVER_WARNING,g);break;case o.TALK_STREAM_INTERRUPTED:let 
+h=a.payload;this.publicEventEmitter.emit(s.TALK_STREAM_INTERRUPTED,h.correlationId);break;case 
+o.SESSION_READY:let i=a.sessionId;this.publicEventEmitter.emit(s.SESSION_READY,i);break;case 
+o.HEARTBEAT:break;default:console.warn("StreamingClient - onSignalMessage: unknown signal message 
+action type. Is your @anam-ai/js-sdk version up to 
+date?",a)}})}onSignallingClientConnected(){return aj(this,void 0,void 
+0,function*(){if(!this.peerConnection)try{yield 
+this.initPeerConnectionAndSendOffer()}catch(a){console.error("StreamingClient - 
+onSignallingClientConnected: Error initializing peer 
+connection",a),this.handleWebrtcFailure(a)}})}flushRemoteIceCandidateBuffer(){return aj(this,void 
+0,void 0,function*(){let a=[...this.remoteIceCandidateBuffer];for(let b 
+of(this.remoteIceCandidateBuffer=[],a))yield 
+this.addRemoteIceCandidate(b)})}addRemoteIceCandidate(a){return aj(this,void 0,void 
+0,function*(){if(this.peerConnection)try{yield this.peerConnection.addIceCandidate(a),this.recordFi
+rstRemoteIceCandidateApplied(a)}catch(a){console.warn("StreamingClient - addRemoteIceCandidate: 
+failed to add remote ICE candidate",a)}})}recordFirstRemoteIceCandidateApplied(a){var b;this.firstR
+emoteIceCandidateApplied||(this.firstRemoteIceCandidateApplied=!0,null==(b=this.connectionMilestone
+s)||b.record("first_remote_ice_candidate_applied",al(a)))}onIceCandidate(a){var b,c;if(a.candidate)
+{if(this.firstLocalIceCandidateSent||(this.firstLocalIceCandidateSent=!0,null==(b=this.connectionMi
+lestones)||b.record("first_local_ice_candidate_sent",al(a.candidate))),this.iceRestartCandidateBuff
+er)return void this.iceRestartCandidateBuffer.push(a.candidate);this.signallingClient.sendIceCandid
+ate(a.candidate)}else null==(c=this.connectionMilestones)||c.record("ice_gathering_complete")}onIce
+ConnectionStateChange(){var a,b,c;let d=null==(a=this.peerConnection)?void 0:a.iceConnectionState;s
+witch(d&&(null==(b=this.connectionMilestones)||b.record("ice_connection_state_changed",{iceConnecti
+onState:d})),d){case"connected":case"completed":this.clearIceDisconnectedGraceTimer(),this.clearIce
+RestartWatchdog(),this.iceRestartInProgress=!1,this.sendIceRestartMetric("recovered"),this.iceResta
+rtAttempts=0,this.signallingClient.endIceRestartReconnect(),this.connectionEstablishedMilestoneReco
+rded||(this.connectionEstablishedMilestoneRecorded=!0,null==(c=this.connectionMilestones)||c.record
+("client_connection_established",{iceConnectionState:d})),this.connectionEstablishedEmitted||(this.
+connectionEstablishedEmitted=!0,this.publicEventEmitter.emit(s.CONNECTION_ESTABLISHED)),this.startS
+tatsCollection();break;case"disconnected":this.scheduleIceRestartAfterGrace();break;case"failed":th
+is.clearIceDisconnectedGraceTimer(),this.restartIce()}}clearIceDisconnectedGraceTimer(){this.iceDis
+connectedGraceTimer&&(clearTimeout(this.iceDisconnectedGraceTimer),this.iceDisconnectedGraceTimer=n
+ull)}clearIceRestartWatchdog(){this.iceRestartWatchdogTimer&&(clearTimeout(this.iceRestartWatchdogT
+imer),this.iceRestartWatchdogTimer=null)}sendIceRestartMetric(a){var 
+b;if(null===this.iceRestartEpisodeStartMs)return;let c=Math.round(performance.now()-this.iceRestart
+EpisodeStartMs),d=null!=(b=this.iceRestartEpisodeTrigger)?b:"unknown";this.iceRestartEpisodeStartMs
+=null,this.iceRestartEpisodeTrigger=null,J(m.CLIENT_METRIC_MEASUREMENT_ICE_RESTART,c,{outcome:a,att
+empts:this.iceRestartAttempts,trigger:d})}isAwaitingRestartAnswer(){return this.iceRestartInProgres
+s||this.iceRestartAwaitedAnswer||null!==this.iceRestartWatchdogTimer}onAnswerAccepted(){var a;let b
+=this.isAwaitingRestartAnswer();if(this.clearIceRestartWatchdog(),this.iceRestartAwaitedAnswer=!1,!
+b)return;this.iceRestartInProgress=!1;let c=null==(a=this.peerConnection)?void 0:a.iceConnectionSta
+te;("disconnected"===c||"failed"===c)&&this.scheduleIceRestartAfterGrace()}clearPendingWsOpenWait()
+{this.pendingWsOpenTimeout&&(clearTimeout(this.pendingWsOpenTimeout),this.pendingWsOpenTimeout=null
+),this.pendingWsOpenListener&&(this.internalEventEmitter.removeListener(t.WEB_SOCKET_OPEN,this.pend
+ingWsOpenListener),this.pendingWsOpenListener=null),this.pendingWsOpenReject=null}cancelIceRestart(
+){this.clearIceDisconnectedGraceTimer(),this.clearIceRestartWatchdog();let 
+a=this.pendingWsOpenReject;this.clearPendingWsOpenWait(),a&&a(Error("ice restart cancelled")),this.
+iceRestartCandidateBuffer=null,this.iceRestartInProgress=!1,this.iceRestartEpisodeStartMs=null,this
+.iceRestartEpisodeTrigger=null,this.signallingClient.endIceRestartReconnect()}flushIceRestartCandid
+ateBuffer(){let a=this.iceRestartCandidateBuffer;if(this.iceRestartCandidateBuffer=null,a)for(let 
+b of a)this.signallingClient.sendIceCandidate(b)}scheduleIceRestartAfterGrace(){this.iceRestartStop
+ped||this.iceRestartInProgress||this.iceDisconnectedGraceTimer||(this.iceDisconnectedGraceTimer=set
+Timeout(()=>{var a;if(this.iceDisconnectedGraceTimer=null,this.iceRestartStopped)return;let 
+b=null==(a=this.peerConnection)?void 0:a.iceConnectionState;("disconnected"===b||"failed"===b)&&thi
+s.restartIce()},2e3))}ensureSignallingConnected(){return this.signallingClient.isConnected()?Promis
+e.resolve():this.signallingClient.isPermanentlyClosed()?Promise.reject(Error("signalling 
+permanently closed")):new Promise((a,b)=>{this.pendingWsOpenReject=b,this.pendingWsOpenTimeout=setT
+imeout(()=>{this.clearPendingWsOpenWait(),b(Error("timed out waiting for signalling 
+WebSocket"))},5e3);let c=()=>{this.clearPendingWsOpenWait(),a()};this.pendingWsOpenListener=c,this.
+internalEventEmitter.addListener(t.WEB_SOCKET_OPEN,c)})}restartIce(){return aj(this,void 0,void 
+0,function*(){var a,b;if(this.peerConnection&&!this.iceRestartInProgress&&!this.iceRestartStopped){
+if(this.signallingClient.isPermanentlyClosed()){this.sendIceRestartMetric("aborted"),this.cancelIce
+Restart();return}if(this.iceRestartAttempts>=3){console.error("StreamingClient - restartIce: 
+exhausted attempts"),null==(a=this.connectionMilestones)||a.publishFailure({failureStage:"ice_conne
+ction",iceConnectionState:null==(b=this.peerConnection)?void 0:b.iceConnectionState}),this.sendIceR
+estartMetric("exhausted"),this.cancelIceRestart(),this.handleWebrtcFailure("The connection to our 
+servers was lost. Please try again.");return}0===this.iceRestartAttempts&&(this.iceRestartEpisodeSt
+artMs=performance.now(),this.iceRestartEpisodeTrigger=this.peerConnection.iceConnectionState),this.
+iceRestartInProgress=!0,this.iceRestartAttempts+=1;try{if("stable"!==this.peerConnection.signalingS
+tate&&(yield this.peerConnection.setLocalDescription({type:"rollback"})),1===this.iceRestartAttempt
+s&&this.signallingClient.reconnectForIceRestart(),yield 
+this.ensureSignallingConnected(),this.iceRestartStopped)return;let a=this.peerConnection.iceConnect
+ionState;if("connected"===a||"completed"===a){this.iceRestartInProgress=!1,this.sendIceRestartMetri
+c("recovered"),this.signallingClient.endIceRestartReconnect();return}this.connectionReceivedAnswer=
+!1,this.remoteIceCandidateBuffer=[];let b=yield 
+this.peerConnection.createOffer({iceRestart:!0});if(this.iceRestartCandidateBuffer=[],yield 
+this.peerConnection.setLocalDescription(b),!this.peerConnection.localDescription)throw Error("null 
+local description after ICE restart offer");yield this.signallingClient.sendOffer(this.peerConnecti
+on.localDescription),this.flushIceRestartCandidateBuffer(),this.iceRestartAwaitedAnswer=!1,this.cle
+arIceRestartWatchdog(),this.iceRestartWatchdogTimer=setTimeout(()=>this.onIceRestartWatchdog(),3e3)
+}catch(a){if(this.iceRestartCandidateBuffer=null,console.error("StreamingClient - restartIce: 
+error",a),this.iceRestartInProgress=!1,this.iceRestartStopped)return void this.cancelIceRestart();i
+f(this.signallingClient.isPermanentlyClosed()){this.sendIceRestartMetric("aborted"),this.cancelIceR
+estart();return}this.clearIceRestartWatchdog(),this.iceRestartWatchdogTimer=setTimeout(()=>{this.ic
+eRestartWatchdogTimer=null,this.restartIce()},3e3)}}})}onIceRestartWatchdog(){var a;if(this.iceRest
+artWatchdogTimer=null,this.iceRestartInProgress=!1,this.iceRestartStopped)return;let 
+b=null==(a=this.peerConnection)?void 0:a.iceConnectionState;if("connected"!==b&&"completed"!==b){if
+(!this.connectionReceivedAnswer&&!this.iceRestartAwaitedAnswer){this.iceRestartAwaitedAnswer=!0,thi
+s.iceRestartInProgress=!0,this.iceRestartWatchdogTimer=setTimeout(()=>this.onIceRestartWatchdog(),3
+e3);return}this.restartIce()}}onConnectionStateChange(){var a,b,c,d,e;let 
+f=null==(a=this.peerConnection)?void 0:a.connectionState;if(f&&(null==(b=this.connectionMilestones)
+||b.record("webrtc_connection_state_changed",{connectionState:f})),"failed"===f){let 
+a=null==(c=this.peerConnection)?void 0:c.iceConnectionState;(this.iceRestartStopped||"disconnected"
+!==a&&"failed"!==a)&&null!=(d=this.connectionMilestones)&&d.publishFailure({failureStage:"webrtc_co
+nnection",connectionState:f})}(null==(e=this.peerConnection)?void 
+0:e.connectionState)==="closed"&&(console.error("StreamingClient - onConnectionStateChange: 
+Connection closed"),this.handleWebrtcFailure("The connection to our servers was lost. Please try 
+again."))}handleWebrtcFailure(a){var b,c;null==(b=this.connectionMilestones)||b.record("webrtc_fail
+ure",am(a)),null==(c=this.connectionMilestones)||c.publishFailure(Object.assign({failureStage:"webr
+tc"},am(a))),console.error({message:"StreamingClient - handleWebrtcFailure: 
+",err:a}),"NotAllowedError"===a.name&&"Permission denied"===a.message?this.publicEventEmitter.emit(
+s.CONNECTION_CLOSED,u.MICROPHONE_PERMISSION_DENIED):this.publicEventEmitter.emit(s.CONNECTION_CLOSE
+D,u.WEBRTC_FAILURE);try{this.stopConnection()}catch(a){console.error("StreamingClient - 
+handleWebrtcFailure: error stopping connection",a)}}onTrackEventHandler(a){var b,c;if("video"===a.t
+rack.kind){if(null==(b=this.connectionMilestones)||b.record("video_track_received"),this.startSucce
+ssMetricPolling(),this.videoStream=a.streams[0],this.publicEventEmitter.emit(s.VIDEO_STREAM_STARTED
+,this.videoStream),this.videoElement){this.videoElement.srcObject=this.videoStream;let 
+a=this.videoElement.requestVideoFrameCallback(()=>{var b;null==(b=this.videoElement)||b.cancelVideo
+FrameCallback(a),this.publicEventEmitter.emit(s.VIDEO_PLAY_STARTED),this.recordSessionSuccess("vide
+oElement")})}}else"audio"===a.track.kind&&(null==(c=this.connectionMilestones)||c.record("audio_tra
+ck_received"),this.audioStream=a.streams[0],this.publicEventEmitter.emit(s.AUDIO_STREAM_STARTED,thi
+s.audioStream))}setupDataChannels(){return aj(this,void 0,void 0,function*(){var 
+a;if(!this.peerConnection)return void console.error("StreamingClient - setupDataChannels: peer 
+connection is not initialized");if(!this.disableInputAudio&&this.inputAudioStream&&!this.inputAudio
+Stream.getAudioTracks().length)throw Error("StreamingClient - setupDataChannels: user provided 
+stream does not have audio tracks");let b=this.peerConnection.createDataChannel("session",{ordered:
+!0});null==(a=this.connectionMilestones)||a.record("data_channel_created"),b.onopen=()=>{var a;this
+.dataChannel=null!=b?b:null,null==(a=this.connectionMilestones)||a.record("data_channel_open"),this
+.publicEventEmitter.emit(s.DATA_CHANNEL_OPEN)},b.onclose=()=>{var 
+a;null==(a=this.connectionMilestones)||a.record("data_channel_closed")},b.onmessage=a=>{var 
+b,c,d,e,f,g,h;try{let i=JSON.parse(a.data);switch(i.messageType){case 
+p.SPEECH_TEXT:this.internalEventEmitter.emit(t.WEBRTC_CHAT_MESSAGE_RECEIVED,i.data);break;case 
+p.CLIENT_TOOL_EVENT:let 
+j=i.data;this.internalEventEmitter.emit(t.WEBRTC_CLIENT_TOOL_EVENT_RECEIVED,j);let k=ai.WebRTCClien
+tToolEventToClientToolEvent(j);this.publicEventEmitter.emit(s.CLIENT_TOOL_EVENT_RECEIVED,k);break;c
+ase p.TOOL_CALL_STARTED_EVENT:let l=i.data;this.publicEventEmitter.emit(s.TOOL_CALL_STARTED,this.to
+olCallManager.WebRTCToolCallStartedEventToToolCallStartedPayload(l)),this.internalEventEmitter.emit
+(t.WEBRTC_TOOL_CALL_STARTED_EVENT_RECEIVED,l);break;case p.TOOL_CALL_COMPLETED_EVENT:let m=i.data;t
+his.publicEventEmitter.emit(s.TOOL_CALL_COMPLETED,this.toolCallManager.webRTCToolCallCompletedEvent
+ToToolCallCompletedPayload(m)),this.internalEventEmitter.emit(t.WEBRTC_TOOL_CALL_COMPLETED_EVENT_RE
+CEIVED,m);break;case p.TOOL_CALL_FAILED_EVENT:let n=i.data;this.publicEventEmitter.emit(s.TOOL_CALL
+_FAILED,this.toolCallManager.webRTCToolCallFailedEventToToolCallFailedPayload(n)),this.internalEven
+tEmitter.emit(t.WEBRTC_TOOL_CALL_FAILED_EVENT_RECEIVED,n);break;case p.REASONING_TEXT:this.internal
+EventEmitter.emit(t.WEBRTC_REASONING_TEXT_MESSAGE_RECEIVED,i.data);break;case p.USER_SPEECH_STARTED
+:this.publicEventEmitter.emit(s.USER_SPEECH_STARTED,null!=(c=null==(b=i.data)?void 
+0:b.user_action_correlation_id)?c:"unknown");break;case p.USER_SPEECH_ENDED:this.publicEventEmitter
+.emit(s.USER_SPEECH_ENDED,null!=(e=null==(d=i.data)?void 
+0:d.user_action_correlation_id)?e:"unknown");break;case p.DIRECTOR_NOTE_CUE_APPLIED:let 
+o=i.data;this.publicEventEmitter.emit(s.DIRECTOR_NOTE_CUE_APPLIED,{cueTag:null!=(f=null==o?void 
+0:o.cue_tag)?f:"unknown",correlationId:null!=(g=null==o?void 
+0:o.user_action_correlation_id)?g:"unknown"});break;case p.PERSONA_CONFIG_UPDATE_APPLIED:let q=i.da
+ta;this.publicEventEmitter.emit(s.PERSONA_CONFIG_UPDATE_APPLIED,{changedFields:null!=(h=null==q?voi
+d 0:q.changed_fields)?h:{}})}}catch(a){console.error("Failed to parse data channel 
+message:",a)}}})}requestMicrophonePermissionAsync(){return aj(this,void 0,void 0,function*(){var a,
+b,c;if(this.inputAudioState.permissionState!==q.PENDING){this.inputAudioState=Object.assign(Object.
+assign({},this.inputAudioState),{permissionState:q.PENDING}),null==(a=this.connectionMilestones)||a
+.record("microphone_permission_pending"),this.publicEventEmitter.emit(s.MIC_PERMISSION_PENDING);try
+{let a=aa(this.audioDeviceId);this.inputAudioStream=yield navigator.mediaDevices.getUserMedia({audi
+o:a}),this.inputAudioState=Object.assign(Object.assign({},this.inputAudioState),{permissionState:q.
+GRANTED}),null==(b=this.connectionMilestones)||b.record("microphone_permission_granted"),this.publi
+cEventEmitter.emit(s.MIC_PERMISSION_GRANTED),yield 
+this.setupAudioTrack("initial")}catch(b){console.error("Failed to get microphone permission:",b),th
+is.inputAudioState=Object.assign(Object.assign({},this.inputAudioState),{permissionState:q.DENIED})
+,null==(c=this.connectionMilestones)||c.record("microphone_permission_denied",Object.assign({},am(b
+)));let a=b instanceof Error?b.message:String(b);this.publicEventEmitter.emit(s.MIC_PERMISSION_DENI
+ED,a)}}})}setupAudioTrack(a){return aj(this,void 0,void 0,function*(){var b;if(!this.peerConnection
+||!this.inputAudioStream)return;if(!this.inputAudioStream.getAudioTracks().length)return void 
+console.error("StreamingClient - setupAudioTrack: stream does not have audio 
+tracks");this.inputAudioState.isMuted&&this.muteAllAudioTracks();let 
+c=this.inputAudioStream.getAudioTracks()[0],d=this.peerConnection.getSenders().find(a=>{var 
+b;return(null==(b=a.track)?void 
+0:b.kind)==="audio"||null===a.track&&null!==a.dtmf});if(d)try{yield 
+d.replaceTrack(c)}catch(a){console.error("Failed to replace audio 
+track:",a),this.peerConnection.addTrack(c,this.inputAudioStream)}else 
+this.peerConnection.addTrack(c,this.inputAudioStream);((a,b,c={})=>{var d,e,f,g;let 
+h,i={};try{i=a.getSettings()}catch(a){}let j={echoCancellation:"all"===(h=(g=i).echoCancellation)||
+"remote-only"===h?"true":ab(h),noiseSuppression:ab(g.noiseSuppression),autoGainControl:ab(g.autoGai
+nControl),voiceIsolation:ab(g.voiceIsolation),channelCount:"number"==typeof g.channelCount&&Number.
+isFinite(g.channelCount)?g.channelCount:0},k=null!=(d=c.platform)?d:((a="u"<typeof navigator?void 
+0:navigator)=>{var b,c;if(!a)return"unknown";let 
+d=null!=(b=a.userAgent)?b:"";if(/android/i.test(d))return"android";let 
+e=/iPad|iPhone|iPod/i.test(d),f="MacIntel"===a.platform&&(null!=(c=a.maxTouchPoints)?c:0)>1;return 
+e||f?"ios":"desktop"})(),l=null!=(e=c.browser)?e:((a="u"<typeof navigator?void 0:navigator)=>{var 
+b;let c=null!=(b=null==a?void 0:a.userAgent)?b:"";return/(Edg|EdgiOS|EdgA)\//i.test(c)?"edge":/(Fir
+efox|FxiOS)\//i.test(c)?"firefox":/(OPR|Opera|SamsungBrowser|Vivaldi|Whale|YaBrowser)\//i.test(c)?"
+other":/(Chrome|CriOS)\//i.test(c)?"chrome":/Safari\//i.test(c)?"safari":"other"})(),n=null!=(f=c.s
+endMetrics)?f:K;try{n([{name:m.CLIENT_METRIC_MEASUREMENT_INPUT_AUDIO_SETTINGS,value:b,tags:{platfor
+m:k,browser:l},fields:Object.assign({},j)}]).catch(()=>{})}catch(a){}})(c,a),null==(b=this.connecti
+onMilestones)||b.record("input_audio_stream_started",{audioTrackCount:this.inputAudioStream.getAudi
+oTracks().length}),this.publicEventEmitter.emit(s.INPUT_AUDIO_STREAM_STARTED,this.inputAudioStream)
+})}initPeerConnectionAndSendOffer(){return aj(this,void 0,void 0,function*(){var 
+a,b,c,d,e,f;if(yield this.initPeerConnection(),!this.peerConnection)return void 
+console.error("StreamingClient - initPeerConnectionAndSendOffer: peer connection is not 
+initialized");try{null==(a=this.connectionMilestones)||a.record("offer_creation_started");let 
+d=yield this.peerConnection.createOffer();null==(b=this.connectionMilestones)||b.record("offer_crea
+tion_completed"),yield this.peerConnection.setLocalDescription(d),null==(c=this.connectionMilestone
+s)||c.record("local_description_set")}catch(a){console.error("StreamingClient - 
+initPeerConnectionAndSendOffer: error creating offer",a),null==(d=this.connectionMilestones)||d.rec
+ord("offer_creation_failed",Object.assign({},am(a))),null==(e=this.connectionMilestones)||e.publish
+Failure(Object.assign({failureStage:"offer_creation"},am(a)))}if(!this.peerConnection.localDescript
+ion)throw Error("StreamingClient - initPeerConnectionAndSendOffer: local description is 
+null");yield this.signallingClient.sendOffer(this.peerConnection.localDescription),null==(f=this.co
+nnectionMilestones)||f.record("offer_sent")})}shutdown(){return aj(this,void 0,void 
+0,function*(){var 
+a;if(this.iceRestartStopped=!0,this.cancelIceRestart(),this.showPeerConnectionStatsReport){let 
+b=yield null==(a=this.peerConnection)?void 0:a.getStats();if(b){let a=((a,b="console")=>{var 
+c,d,e;let f={};a.forEach(a=>{f[a.type]||(f[a.type]=[]),f[a.type].push(a)});let 
+g={issues:[]},h=(null==(c=f["inbound-rtp"])?void 
+0:c.filter(a=>"video"===a.kind))||[];h.length>0&&(g.personaVideoStream=[],h.forEach(a=>{var 
+b,c,d,e,f;let h={framesReceived:null!=(b=a.framesReceived)?b:"unknown",framesDropped:null!=(c=a.fra
+mesDropped)?c:"unknown",framesPerSecond:null!=(d=a.framesPerSecond)?d:"unknown",packetsReceived:nul
+l!=(e=a.packetsReceived)?e:"unknown",packetsLost:null!=(f=a.packetsLost)?f:"unknown",resolution:a.f
+rameWidth&&a.frameHeight?`${a.frameWidth}x${a.frameHeight}`:void 0,jitter:void 
+0!==a.jitter?a.jitter:void 0};g.personaVideoStream.push(h)}));let 
+i=(null==(d=f["inbound-rtp"])?void 
+0:d.filter(a=>"audio"===a.kind))||[];i.length>0&&(g.personaAudioStream=[],i.forEach(a=>{var 
+b,c,d;let e={packetsReceived:null!=(b=a.packetsReceived)?b:"unknown",packetsLost:null!=(c=a.packets
+Lost)?c:"unknown",audioLevel:null!=(d=a.audioLevel)?d:"unknown",jitter:void 
+0!==a.jitter?a.jitter:void 0,totalAudioEnergy:void 0!==a.totalAudioEnergy?a.totalAudioEnergy:void 
+0};g.personaAudioStream.push(e)}));let j=(null==(e=f["outbound-rtp"])?void 
+0:e.filter(a=>"audio"===a.kind))||[];j.length>0&&(g.userAudioInput=[],j.forEach(a=>{var b,c;let d={
+packetsSent:null!=(b=a.packetsSent)?b:"unknown",retransmittedPackets:null!=(c=a.retransmittedPacket
+sSent)?c:void 0,avgPacketSendDelay:void 
+0!==a.totalPacketSendDelay?a.totalPacketSendDelay/(a.packetsSent||1)*1e3:void 
+0};g.userAudioInput.push(d)})),f.codec&&(g.codecs=[],f.codec.forEach(a=>{let b={status:a.payloadTyp
+e?"Active":"Available",mimeType:a.mimeType||"Unknown",payloadType:a.payloadType||"N/A",clockRate:a.
+clockRate||void 0,channels:a.channels||void 
+0};g.codecs.push(b)})),f.transport&&(g.transportLayer=[],f.transport.forEach(a=>{let 
+b={dtlsState:a.dtlsState||"unknown",iceState:a.iceState||"unknown",bytesSent:a.bytesSent||void 
+0,bytesReceived:a.bytesReceived||void 0};g.transportLayer.push(b)}));let 
+k=[];if(h.forEach(a=>{"number"==typeof a.framesDropped&&a.framesDropped>0&&k.push(`Video: 
+${a.framesDropped} frames dropped`),"number"==typeof 
+a.packetsLost&&a.packetsLost>0&&k.push(`Video: ${a.packetsLost} packets lost`),"number"==typeof 
+a.framesPerSecond&&a.framesPerSecond<23&&k.push(`Video: Low frame rate (${a.framesPerSecond} 
+fps)`)}),i.forEach(a=>{"number"==typeof a.packetsLost&&a.packetsLost>0&&k.push(`Audio: 
+${a.packetsLost} packets lost`),"number"==typeof a.jitter&&a.jitter>.1&&k.push(`Audio: High jitter 
+(${(1e3*a.jitter).toFixed(1)}ms)`)}),g.issues=k,"json"===b)return g;console.group("📊 WebRTC 
+Session Statistics 
+Report"),g.personaVideoStream&&g.personaVideoStream.length>0&&(console.group("📹 Persona Video 
+Stream (Inbound)"),g.personaVideoStream.forEach(a=>{console.log(`Frames Received: 
+${a.framesReceived}`),console.log(`Frames Dropped: ${a.framesDropped}`),console.log(`Frames Per 
+Second: ${a.framesPerSecond}`),console.log(`Packets Received: ${"number"==typeof 
+a.packetsReceived?a.packetsReceived.toLocaleString():a.packetsReceived}`),console.log(`Packets 
+Lost: ${a.packetsLost}`),a.resolution&&console.log(`Resolution: ${a.resolution}`),void 
+0!==a.jitter&&console.log(`Jitter: ${a.jitter.toFixed(5)}ms`)}),console.groupEnd()),g.personaAudioS
+tream&&g.personaAudioStream.length>0&&(console.group("🔊 Persona Audio Stream 
+(Inbound)"),g.personaAudioStream.forEach(a=>{console.log(`Packets Received: ${"number"==typeof 
+a.packetsReceived?a.packetsReceived.toLocaleString():a.packetsReceived}`),console.log(`Packets 
+Lost: ${a.packetsLost}`),console.log(`Audio Level: ${a.audioLevel}`),void 
+0!==a.jitter&&console.log(`Jitter: ${a.jitter.toFixed(5)}ms`),void 
+0!==a.totalAudioEnergy&&console.log(`Total Audio Energy: ${a.totalAudioEnergy.toFixed(6)}`)}),conso
+le.groupEnd()),g.userAudioInput&&g.userAudioInput.length>0&&(console.group("🎤 User Audio Input 
+(Outbound)"),g.userAudioInput.forEach(a=>{console.log(`Packets Sent: ${"number"==typeof a.packetsSe
+nt?a.packetsSent.toLocaleString():a.packetsSent}`),a.retransmittedPackets&&console.log(`Retransmitt
+ed Packets: ${a.retransmittedPackets}`),void 0!==a.avgPacketSendDelay&&console.log(`Avg Packet 
+Send Delay: ${a.avgPacketSendDelay.toFixed(5)}ms`)}),console.groupEnd()),g.codecs&&g.codecs.length>
+0&&(console.group("🔧 Codecs Used"),g.codecs.forEach(a=>{console.log(`${a.status} ${a.mimeType} - 
+Payload Type: ${a.payloadType}`),a.clockRate&&console.log(`  Clock Rate: 
+${a.clockRate}Hz`),a.channels&&console.log(`  Channels: ${a.channels}`)}),console.groupEnd()),g.tra
+nsportLayer&&g.transportLayer.length>0&&(console.group("🚚 Transport 
+Layer"),g.transportLayer.forEach(a=>{console.log(`DTLS State: ${a.dtlsState}`),console.log(`ICE 
+State: ${a.iceState}`),(a.bytesReceived||a.bytesSent)&&console.log(`Data Transfer (bytes) - Sent: 
+${(a.bytesSent||0).toLocaleString()}, Received: ${(a.bytesReceived||0).toLocaleString()}`)}),consol
+e.groupEnd()),g.issues.length>0?(console.group("⚠️ Potential Issues 
+Detected"),g.issues.forEach(a=>console.warn(a)),console.groupEnd()):console.log("✅ No significant 
+issues detected"),console.groupEnd()})(b,this.peerConnectionStatsReportOutputFormat);a&&console.log
+(a,void 0,2)}}this.statsCollectionInterval&&(clearInterval(this.statsCollectionInterval),this.stats
+CollectionInterval=null),this.successMetricPoller&&(clearInterval(this.successMetricPoller),this.su
+ccessMetricPoller=null),this.successMetricFired=!1;try{this.inputAudioStream&&this.inputAudioStream
+.getTracks().forEach(a=>{a.stop()}),this.inputAudioStream=null}catch(a){console.error("StreamingCli
+ent - shutdown: error stopping input audio 
+stream",a)}try{this.signallingClient.stop()}catch(a){console.error("StreamingClient - shutdown: 
+error stopping signallilng",a)}try{this.peerConnection&&"closed"!==this.peerConnection.connectionSt
+ate&&(this.peerConnection.onconnectionstatechange=null,this.peerConnection.close(),this.peerConnect
+ion=null)}catch(a){console.error("StreamingClient - shutdown: error closing peer 
+connection",a)}})}}let al=a=>an({candidateType:a.type,protocol:a.protocol,relayProtocol:a.relayProt
+ocol,tcpType:a.tcpType,component:a.component}),am=a=>a instanceof 
+Error?an({errorName:a.name}):"object"==typeof a&&null!==a?an({errorName:"string"==typeof 
+a.name?a.name:void 0,errorCode:"string"==typeof a.code||"number"==typeof a.code?a.code:void 
+0}):{},an=a=>{let b={};return Object.entries(a).forEach(([a,c])=>{void 0!==c&&(b[a]=c)}),b};class a
+o{constructor(a,b){this.reasoning_messages=[],this.publicEventEmitter=a,this.internalEventEmitter=b
+,this.internalEventEmitter.addListener(t.WEBRTC_REASONING_TEXT_MESSAGE_RECEIVED,this.processWebRtcR
+easoningTextMessageEvent.bind(this))}webRtcTextMessageEventToReasoningStreamEvent(a){return{id:`${a
+.role}::${a.message_id}`,content:a.content,endOfThought:a.end_of_thought,role:a.role}}processWebRtc
+ReasoningTextMessageEvent(a){let b=this.webRtcTextMessageEventToReasoningStreamEvent(a);this.public
+EventEmitter.emit(s.REASONING_STREAM_EVENT_RECEIVED,b);let c={id:b.id,content:b.content,role:b.role
+},d=this.reasoning_messages.findIndex(a=>a.id===c.id);if(-1!==d){let 
+a=this.reasoning_messages[d];a.content+=c.content,this.reasoning_messages[d]=a}else this.reasoning_
+messages.push(c);b.endOfThought&&this.publicEventEmitter.emit(s.REASONING_HISTORY_UPDATED,this.reas
+oning_messages)}}class 
+ap{constructor(){this.listeners={}}addListener(a,b){this.listeners[a]||(this.listeners[a]=new Set),
+this.listeners[a].add(b)}removeListener(a,b){this.listeners[a]&&this.listeners[a].delete(b)}emit(a,
+...b){this.listeners[a]&&this.listeners[a].forEach(a=>{a(...b)})}}var aq=function(a,b,c,d){return 
+new(c||(c=Promise))(function(e,f){function g(a){try{i(d.next(a))}catch(a){f(a)}}function 
+h(a){try{i(d.throw(a))}catch(a){f(a)}}function i(a){var b;a.done?e(a.value):((b=a.value)instanceof 
+c?b:new c(function(a){a(b)})).then(g,h)}i((d=d.apply(a,b||[])).next())})};class 
+ar{constructor(a,c,d){var e,f,g,h,i;this.inputAudioState={isMuted:!1,permissionState:q.NOT_REQUESTE
+D},this.sessionId=null,this.servedRegion=null,this.organizationId=null,this.streamingClient=null,th
+is._isStreaming=!1;const j=this.validateClientConfig(a,c,d);if(j)throw new M(j,n.CLIENT_ERROR_CODE_
+CONFIGURATION_ERROR,400);this.personaConfig=c,this.clientOptions=d,((null==(e=null==d?void 
+0:d.api)?void 0:e.baseUrl)||(null==(f=null==d?void 0:d.api)?void 0:f.apiVersion))&&((a,b=D)=>{E=a,F
+=b})(d.api.baseUrl||C,d.api.apiVersion||D),(null==(h=null==(g=null==d?void 0:d.api)?void 
+0:g.apiGateway)?void 0:h.enabled)&&(a=>{b=a})(d.api.apiGateway),(null==(i=null==d?void 
+0:d.metrics)?void 0:i.disableClientMetrics)&&(a=>{G=a})(!0),this.publicEventEmitter=new 
+_,this.internalEventEmitter=new ap,this.toolCallManager=new 
+ai(this.publicEventEmitter,this.internalEventEmitter),this.apiClient=new X(a,null==d?void 
+0:d.apiKey,null==d?void 0:d.api),this.messageHistoryClient=new 
+$(this.publicEventEmitter,this.internalEventEmitter),this.reasoningHistoryClient=new 
+ao(this.publicEventEmitter,this.internalEventEmitter)}decodeJwt(a){try{let 
+b=a.split(".")[1],c=z.Buffer.from(b,"base64").toString("utf8");return JSON.parse(c)}catch(a){throw 
+Error("Invalid session token format")}}validateClientConfig(a,b,c){var d,e;if(!a&&!(null==c?void 
+0:c.apiKey))return"Either sessionToken or apiKey must be provided";if((null==c?void 
+0:c.apiKey)&&a)return"Only one of sessionToken or apiKey should be used";let 
+f=function(a){if(a&&a.enabled){if(!a.baseUrl)return"API Gateway baseUrl is required when 
+enabled";try{let b=new 
+URL(a.baseUrl);if(!["http:","https:","ws:","wss:"].includes(b.protocol))return`Invalid API Gateway 
+baseUrl protocol: ${b.protocol}. Must be http:, https:, ws:, or wss:`}catch(b){return`Invalid API 
+Gateway baseUrl: ${a.baseUrl}`}if(a.wsPath&&!a.wsPath.startsWith("/"))return"API Gateway wsPath 
+must start with /"}}(null==(d=null==c?void 0:c.api)?void 0:d.apiGateway);if(f)return f;if(a){let 
+c=this.decodeJwt(a);this.organizationId=c.accountId,I({organizationId:this.organizationId});let 
+d=null==(e=c.type)?void 0:e.toLowerCase();if("legacy"===d)return"Legacy session tokens are no 
+longer supported. Please define your persona when creating your session token. See 
+https://docs.anam.ai/resources/migrating-legacy for more 
+information.";if(("ephemeral"===d||"stateful"===d)&&b)return"This session token already contains a 
+persona configuration. Please remove the personaConfig parameter."}else if(!b)return"Missing 
+persona config. Persona configuration must be provided when using apiKey";let g=at(b);if(g)return 
+g;if(null==c?void 0:c.voiceDetection){if(c.disableInputAudio)return"Voice detection is disabled 
+because input audio is disabled. Please set disableInputAudio to false to enable voice 
+detection.";if(void 0!==c.voiceDetection.endOfSpeechSensitivity){if("number"!=typeof 
+c.voiceDetection.endOfSpeechSensitivity)return"End of speech sensitivity must be a number";if(c.voi
+ceDetection.endOfSpeechSensitivity<0||c.voiceDetection.endOfSpeechSensitivity>1)return"End of 
+speech sensitivity must be between 0 and 1"}}}buildStartSessionOptionsForClient(){var a;let 
+b={};if((null==(a=this.clientOptions)?void 0:a.voiceDetection)&&(b.voiceDetection=this.clientOption
+s.voiceDetection),0!==Object.keys(b).length)return b}startConnectionAttempt(){var a,b,c,d;let 
+e="u">typeof crypto&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().to
+String(36).substr(2,9);I({attemptCorrelationId:e,sessionId:null,organizationId:this.organizationId}
+);let f=new N({context:{attemptCorrelationId:e,sessionId:null,organizationId:this.organizationId},c
+onnectionMilestoneSampleRatio:null==(b=null==(a=this.clientOptions)?void 0:a.metrics)?void 0:b.conn
+ectionMilestoneSampleRatio,slowConnectionThresholdMs:null==(d=null==(c=this.clientOptions)?void 
+0:c.metrics)?void 0:d.slowConnectionThresholdMs});return 
+J(m.CLIENT_METRIC_MEASUREMENT_SESSION_ATTEMPT,"1"),f}startSession(a,b){return aq(this,void 0,void 
+0,function*(){var c,d,e,f,g,h,i,j,k,l,m,o,p,q,r,s,t;let 
+u,v=this.personaConfig;this.validatePersonaConfigOrThrow(v);let w=this.buildStartSessionOptionsForC
+lient();null==b||b.record("start_session_request_started");try{u=yield this.apiClient.startSession(
+v,w),null==b||b.record("start_session_request_completed")}catch(a){throw null==b||b.record("start_s
+ession_request_failed",Object.assign({},as(a))),null==b||b.publishFailure(Object.assign({failureSta
+ge:"start_session_request"},as(a))),a}let{sessionId:x,clientConfig:y,engineHost:z,engineProtocol:A,
+signallingEndpoint:B,region:C}=u,{heartbeatIntervalSeconds:D,maxWsReconnectionAttempts:E,iceServers
+:F,iceTransportPolicy:G}=y;this.sessionId=x,this.servedRegion=null!=C?C:null,this.toolCallManager.s
+etActiveSession(x),I({sessionId:this.sessionId}),null==b||b.updateContext({sessionId:this.sessionId
+,organizationId:this.organizationId});let H=null!=(g=null!=(d=null==(c=this.clientOptions)?void 
+0:c.iceServers)?d:null==(f=null==(e=this.clientOptions)?void 0:e.rtcConfiguration)?void 
+0:f.iceServers)?g:F;try{this.streamingClient=new ak(x,{engine:{baseUrl:`${A}://${z}`},signalling:{h
+eartbeatIntervalSeconds:D,maxWsReconnectionAttempts:E,url:{baseUrl:z,protocol:A,signallingPath:B}},
+iceServers:H,iceTransportPolicy:G,rtcConfiguration:null==(h=this.clientOptions)?void 0:h.rtcConfigu
+ration,inputAudio:{inputAudioState:this.inputAudioState,userProvidedMediaStream:(null==(i=this.clie
+ntOptions)?void 0:i.disableInputAudio)?void 0:a,audioDeviceId:null==(j=this.clientOptions)?void 
+0:j.audioDeviceId,disableInputAudio:null==(k=this.clientOptions)?void 
+0:k.disableInputAudio},apiGateway:null==(m=null==(l=this.clientOptions)?void 0:l.api)?void 0:m.apiG
+ateway,metrics:{showPeerConnectionStatsReport:null!=(q=null==(p=null==(o=this.clientOptions)?void 
+0:o.metrics)?void 0:p.showPeerConnectionStatsReport)&&q,peerConnectionStatsReportOutputFormat:null!
+=(t=null==(s=null==(r=this.clientOptions)?void 0:r.metrics)?void 0:s.peerConnectionStatsReportOutpu
+tFormat)?t:"console"}},this.publicEventEmitter,this.internalEventEmitter,this.toolCallManager,b)}ca
+tch(a){throw null==b||b.publishFailure(Object.assign({failureStage:"streaming_client_initialization
+"},as(a))),this.toolCallManager.clearSessionState(),this.servedRegion=null,I({sessionId:null}),new 
+M("Failed to initialize streaming client",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:a instanceof 
+Error?a.message:String(a),sessionId:x})}return x})}startSessionIfNeeded(a,b){return aq(this,void 
+0,void 0,function*(){if((!this.sessionId||!this.streamingClient)&&(yield 
+this.startSession(a,b),!this.sessionId||!this.streamingClient))throw 
+null==b||b.publishFailure({failureStage:"start_session_validation"}),new M("Session ID or 
+streaming client is not available after starting 
+session",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:"Failed to initialize session 
+properly"})})}stream(a){return aq(this,void 0,void 0,function*(){var b;if(this._isStreaming)throw 
+Error("Already streaming");let c=this.startConnectionAttempt();(null==(b=this.clientOptions)?void 
+0:b.disableInputAudio)&&a&&console.warn("AnamClient: Input audio is disabled. User-provided audio 
+stream will be ignored.");try{yield this.startSessionIfNeeded(a,c)}catch(a){throw 
+c.publishFailure(Object.assign({failureStage:"start_session"},as(a))),a}return 
+this._isStreaming=!0,new Promise(a=>{var b;let c=[],d=!1,e=!1;this.publicEventEmitter.addListener(s
+.VIDEO_STREAM_STARTED,b=>{c.push(b),d=!0,e&&a(c)}),this.publicEventEmitter.addListener(s.AUDIO_STRE
+AM_STARTED,b=>{c.push(b),e=!0,d&&a(c)}),null==(b=this.streamingClient)||b.startConnection()})})}str
+eamToVideoAndAudioElements(a,b,c){return aq(this,void 0,void 
+0,function*(){console.warn("AnamClient: streamToVideoAndAudioElements is deprecated. To avoid 
+possible audio issues, please use streamToVideoElement instead."),yield 
+this.streamToVideoElement(a,c)})}streamToVideoElement(a,b){return aq(this,void 0,void 
+0,function*(){var c;let d=this.startConnectionAttempt();(null==(c=this.clientOptions)?void 
+0:c.disableInputAudio)&&b&&console.warn("AnamClient: Input audio is disabled. User-provided audio 
+stream will be ignored.");try{yield this.startSessionIfNeeded(b,d)}catch(a){if(d.publishFailure(Obj
+ect.assign({failureStage:"start_session"},as(a))),a instanceof M)throw a;throw new M("Failed to 
+start session",n.CLIENT_ERROR_CODE_SERVER_ERROR,500,{cause:a instanceof 
+Error?a.message:String(a),sessionId:this.sessionId})}if(this._isStreaming)throw 
+d.publishFailure({failureStage:"already_streaming"}),Error("Already 
+streaming");if(this._isStreaming=!0,!this.streamingClient)throw 
+d.publishFailure({failureStage:"streaming_client_missing"}),Error("Failed to stream: streaming 
+client is not available");try{this.streamingClient.setMediaStreamTargetById(a),this.streamingClient
+.startConnection()}catch(a){throw 
+d.publishFailure(Object.assign({failureStage:"start_connection"},as(a))),a}})}talk(a){return 
+aq(this,void 0,void 0,function*(){if(!this.streamingClient)throw Error("Failed to send talk 
+command: session is not started. Have you called startSession?");if(!this._isStreaming)throw 
+Error("Failed to send talk command: not currently streaming. Have you called stream?");yield this.s
+treamingClient.sendTalkCommand(a)})}sendDataMessage(a){if(this.streamingClient)this.streamingClient
+.sendDataMessage(a);else throw Error("Failed to send message: session is not 
+started.")}sendUserMessage(a){if(!this._isStreaming)throw console.warn("AnamClient: Not currently 
+streaming. User message will not be sent."),Error("Failed to send user message: not currently 
+streaming");let b=this.getActiveSessionId();if(!b)throw Error("Failed to send user message: no 
+active session");let c=JSON.stringify({content:a,timestamp:new Date().toISOString().replace("Z","")
+,session_id:b,message_type:"speech"});this.sendDataMessage(c)}interruptPersona(){if(!this._isStream
+ing)throw Error("Failed to send interrupt command: not currently streaming");let 
+a=this.getActiveSessionId();if(!a)throw Error("Failed to send interrupt command: no active 
+session");let b=JSON.stringify({message_type:"interrupt",session_id:a,timestamp:new 
+Date().toISOString()});this.sendDataMessage(b)}addContext(a){if(!this._isStreaming)throw 
+Error("Failed to add context: not currently streaming");let 
+b=this.getActiveSessionId();if(!b)throw Error("Failed to add context: no active session");let c=JSO
+N.stringify({message_type:"context",session_id:b,content:a});this.sendDataMessage(c)}sendDirectorNo
+teCue(a,b={}){var c;if(!this._isStreaming)throw Error("Failed to send Director Note cue: not 
+currently streaming");if("string"!=typeof a||0===a.length)throw Error("Failed to send Director 
+Note cue: tag must not be empty");if(z.Buffer.byteLength(a,"utf8")>64)throw Error("Failed to send 
+Director Note cue: tag must not exceed 64 bytes");if(!T.includes(a))throw Error(`Failed to send 
+Director Note cue: unsupported tag "${a}"`);let{inSeconds:d,atSeconds:e}=b;if(void 0!==d&&void 
+0!==e)throw Error("Failed to send Director Note cue: provide only one of inSeconds or 
+atSeconds");for(let[a,b]of[["inSeconds",d],["atSeconds",e]])if(void 0!==b&&("number"!=typeof 
+b||!Number.isFinite(b)||b<0))throw Error(`Failed to send Director Note cue: ${a} must be a finite 
+non-negative number`);let 
+f=JSON.stringify(Object.assign(Object.assign({message_type:"director_note_cue",cue:{tag:a}},void 
+0!==d?{in_seconds:d}:{}),void 0!==e?{at_seconds:e}:{}));if(!(null==(c=this.streamingClient)?void 
+0:c.sendDataMessage(f)))throw Error("Failed to send Director Note cue: data channel is not 
+open")}stopStreaming(){return aq(this,void 0,void 0,function*(){this.streamingClient&&(this.publicE
+ventEmitter.emit(s.CONNECTION_CLOSED,u.NORMAL),this.toolCallManager.clearSessionState(),yield this.
+streamingClient.stopConnection(),this.streamingClient=null,this.sessionId=null,this.servedRegion=nu
+ll,I({attemptCorrelationId:null,sessionId:null,organizationId:this.organizationId}),this._isStreami
+ng=!1)})}isStreaming(){return this._isStreaming}setPersonaConfig(a){this.validatePersonaConfigOrThr
+ow(a),this.personaConfig=a}getPersonaConfig(){return this.personaConfig}getInputAudioState(){var 
+a;return(null==(a=this.clientOptions)?void 0:a.disableInputAudio)&&console.warn("AnamClient: Audio 
+state will not be used because input audio is disabled."),this.streamingClient&&(this.inputAudioSta
+te=this.streamingClient.getInputAudioState()),this.inputAudioState}muteInputAudio(){var 
+a,b;return(null==(a=this.clientOptions)?void 0:a.disableInputAudio)&&console.warn("AnamClient: 
+Input audio is disabled. Muting input audio will have no 
+effect."),!this.streamingClient||(null==(b=this.clientOptions)?void 0:b.disableInputAudio)?this.inp
+utAudioState=Object.assign(Object.assign({},this.inputAudioState),{isMuted:!0}):this.inputAudioStat
+e=this.streamingClient.muteInputAudio(),this.inputAudioState}unmuteInputAudio(){var 
+a,b;return(null==(a=this.clientOptions)?void 0:a.disableInputAudio)&&console.warn("AnamClient: 
+Input audio is disabled. Unmuting input audio will have no 
+effect."),!this.streamingClient||(null==(b=this.clientOptions)?void 0:b.disableInputAudio)?this.inp
+utAudioState=Object.assign(Object.assign({},this.inputAudioState),{isMuted:!1}):this.inputAudioStat
+e=this.streamingClient.unmuteInputAudio(),this.inputAudioState}changeAudioInputDevice(a){return 
+aq(this,void 0,void 0,function*(){var b;if(null==(b=this.clientOptions)?void 
+0:b.disableInputAudio)throw Error("AnamClient: Cannot change audio input device because input 
+audio is disabled.");if(!this._isStreaming)throw Error("AnamClient: Cannot change audio input 
+device while not streaming. Start streaming first.");if(!this.streamingClient)throw 
+Error("AnamClient: Cannot change audio input device because streaming client is not available. 
+Start streaming first.");yield this.streamingClient.changeAudioInputDevice(a)})}createTalkMessageSt
+ream(a){if(!this.streamingClient)throw Error("Failed to start talk message stream: session is not 
+started.");if(a&&""===a.trim())throw Error("Failed to start talk message stream: correlationId is 
+empty");return this.streamingClient.startTalkMessageStream(a)}createAgentAudioInputStream(a){if(!th
+is.streamingClient)throw Error("Failed to create agent audio input stream: session is not 
+started.");return this.streamingClient.createAgentAudioInputStream(a)}addListener(a,b){this.publicE
+ventEmitter.addListener(a,b)}removeListener(a,b){this.publicEventEmitter.removeListener(a,b)}getAct
+iveSessionId(){return this.sessionId}getActiveSessionRegion(){return 
+this.servedRegion}registerToolCallHandler(a,b){return 
+this.toolCallManager.registerHandler(a,b)}validatePersonaConfigOrThrow(a){let b=at(a);if(b)throw 
+new M(b,n.CLIENT_ERROR_CODE_CONFIGURATION_ERROR,400)}}let as=a=>a instanceof 
+M?{errorName:a.name,errorCode:a.code,httpStatusCode:a.statusCode}:a instanceof 
+Error?{errorName:a.name}:{},at=a=>{var b;let c=null==(b=null==a?void 0:a.directorNotes)?void 
+0:b.expressivity;if(void 0!==c&&!("number"==typeof 
+c&&Number.isFinite(c)&&c>=0&&c<=1))return"Director Notes expressivity must be a finite number 
+between 0 and 1"};a.s(["default",0,function(){(0,y.useRouter)();let[a,b]=(0,x.useState)("Candidate"
+),[c,d]=(0,x.useState)(""),[e,f]=(0,x.useState)(0),[g,h]=(0,x.useState)(0);(0,x.useRef)(new Set);le
+t[i,j]=(0,x.useState)(!1),k=(0,x.useRef)(null),l=(0,x.useRef)(null),m=(0,x.useRef)(null),[n,o]=(0,x
+.useState)(0),p=n>=720;(0,x.useEffect)(()=>{let a=l.current,b=k.current;a&&b&&(i?(a.pause(),b.pause
+(),b.currentTime=0,b.muted=!0,b.loop=!0,b.play().catch(a=>{console.warn("Interaction playback faile
+d:",a)})):(b.pause(),a.pause(),a.currentTime=0,a.muted=!1,a.loop=!1,a.play().catch(a=>{console.warn
+("Yuna playback failed:",a)})))},[e,i]);let[q,r]=(0,x.useState)("ready"),[t,u]=(0,x.useState)([]),v
+=(0,x.useRef)([]),z=(0,x.useRef)(""),[A,B]=(0,x.useState)(""),[C,D]=(0,x.useState)(""),[E,F]=(0,x.u
+seState)(!0),[G,H]=(0,x.useState)(!0),[I,J]=(0,x.useState)(""),[K,L]=(0,x.useState)(!1),[M,N]=(0,x.
+useState)(!1),[O,P]=(0,x.useState)(!1),[Q,R]=(0,x.useState)(!1),[S,T]=(0,x.useState)(!1),[U,V]=(0,x
+.useState)(!1),[W,X]=(0,x.useState)(null),[Y,Z]=(0,x.useState)(!0),$=(0,x.useRef)(null),_=(0,x.useR
+ef)(null),aa=(0,x.useRef)(null),ab=(0,x.useRef)([]),ac=(0,x.useRef)(null);(0,x.useRef)(!1),(0,x.use
+Ref)(!1),(0,x.useRef)(null),(0,x.useRef)(0);let ad=(0,x.useRef)(0),ae=(0,x.useRef)(""),af=(0,x.useR
+ef)(null),ag=(0,x.useRef)({}),ah=(0,x.useRef)(0);(0,x.useEffect)(()=>{ah.current=n},[n]),(0,x.useRe
+f)(!1);let ai=(0,x.useRef)(!1),aj=(0,x.useRef)(null),ak=(0,x.useRef)(null),al=(0,x.useRef)(null);(0
+,x.useRef)(!1);let am=a=>{let b=Math.floor(a/60);return`${String(b).padStart(2,"0")}:${String(a%60)
+.padStart(2,"0")}`},an=(0,x.useCallback)((a,b)=>{if(!b.trim())return;let c={id:`${Date.now()}-${Mat
+h.random()}`,speaker:a,text:b.trim(),time:am(n)};v.current=[...v.current,c],u(c=>[...c,{id:`${Date.
+now()}-${Math.random()}`,speaker:a,text:b.trim(),time:am(n)}])},[n]);(0,x.useEffect)(()=>{let 
+a=!0;return(async()=>{try{if(J(""),!navigator.mediaDevices?.getUserMedia)throw Error("Camera and 
+microphone access is not supported by this browser.");let b=await navigator.mediaDevices.getUserMed
+ia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:720}},audio:!0});if(!a)return void b.
+getTracks().forEach(a=>a.stop());_.current=b,$.current&&($.current.srcObject=b,$.current.muted=!0,a
+wait $.current.play().catch(()=>{})),ab.current=[];let c=["video/webm;codecs=vp9,opus","video/webm;
+codecs=vp8,opus","video/webm"].find(a=>MediaRecorder.isTypeSupported(a));if(!c)throw Error("Video 
+recording is not supported by this browser.");let d=new MediaRecorder(b,{mimeType:c});d.ondataavail
+able=a=>{a.data&&a.data.size>0&&ab.current.push(a.data)},d.onerror=a=>{console.error("MediaRecorder
+ error:",a)},d.onstop=()=>{console.log("Video recording stopped. 
+Chunks:",ab.current.length),N(!1)},aa.current=d,d.start(1e3),L(!0),N(!0),console.log("SUCCESS: 
+Camera and microphone connected."),console.log("SUCCESS: Video recording 
+started.")}catch(a){console.error("Camera/microphone setup failed:",a),L(!1),N(!1),J(a instanceof 
+Error?a.message:"Unable to access your camera and microphone. Please allow camera and microphone 
+permissions and try again.")}})(),()=>{if(a=!1,aa.current?.state==="recording")try{aa.current.stop(
+)}catch{}aa.current=null,_.current&&(_.current.getTracks().forEach(a=>a.stop()),_.current=null),$.c
+urrent&&($.current.srcObject=null)}},[]),(0,x.useEffect)(()=>{let a=new URLSearchParams(window.loca
+tion.search),c=a.get("name"),e=a.get("email");c&&b(c),e&&d(e)},[an]);let 
+ao=(0,x.useRef)(!1),ap=()=>{let 
+a=ae.current.trim(),b=z.current.trim(),c=a;b&&(c?c.includes(b)||b.includes(c)||(c=`${c} ${b}`.trim(
+)):c=b),c&&(v.current[v.current.length-1],ae.current="",z.current="",D(""),B(""))},aq=async()=>{if(
+ao.current)return void console.log("Submission already in progress, skipping duplicate 
+call.");ao.current=!0,ap(),T(!0),console.log("=== INTERVIEW SUBMISSION STARTED ===");try{let 
+b=v.current.map(a=>`${"ai"===a.speaker?"AIINTERVIEWER":"CANDIDATE"}: 
+${a.text}`).join("\n\n"),d=new FormData;if(d.append("name",a),d.append("email",c),d.append("transcr
+ipt",b.trim()),d.append("questionCount",String(e+1)),d.append("timeTaken",String(n)),d.append("time
+Exceeded",String(n>720)),d.append("overtimeSeconds",String(Math.max(0,n-720))),console.log("Submiss
+ion metadata:",{name:a,email:c,questionCount:e+1,timeTaken:n,timeExceeded:n>720}),ab.current.length
+>0){let a=new Blob(ab.current,{type:"video/webm"}),b=new File([a],`interview-${Date.now()}.webm`,{t
+ype:"video/webm"});d.append("video",b),console.log("Video attached:",b.name,b.size,"bytes")}else 
+console.warn("WARNING: No recorded video chunks found.");console.log("Sending POST request 
+to:","/api/interview/complete"),await 
+fetch("/api/interview/complete",{method:"POST",body:d}),console.log("=== INTERVIEW SUBMISSION SENT 
+TO N8N ===");let f=`/thank-you?name=${encodeURIComponent(a)}`+(n>=840?"&overtime=true":"");window.l
+ocation.href=f}catch(a){console.error("=== INTERVIEW SUBMISSION FAILED 
+===",a),ao.current=!1,T(!1),window.alert("Unable to submit the interview. Please try again.")}};ret
+urn(al.current=aq,(0,x.useEffect)(()=>{if(O||null===aj.current||ai.current)return;let a=aj.current,
+b=84e4-(Date.now()-a),c=async()=>{if(!ai.current&&!O){if(ai.current=!0,console.log("14-minute hard 
+limit reached. Automatically submitting complete interview to n8n..."),V(!0),P(!0),r("overtime"),ap
+(),ac.current)try{ac.current.abort()}catch{}if(aa.current?.state==="recording")try{aa.current.stop(
+)}catch{}"speechSynthesis"in window&&window.speechSynthesis.cancel(),await new 
+Promise(a=>{setTimeout(a,500)}),await al.current?.()}};return b<=0?void c():(ak.current=window.setT
+imeout(()=>{c()},b),()=>{null!==ak.current&&(window.clearTimeout(ak.current),ak.current=null)})},[O
+]),(0,x.useEffect)(()=>{let a=null,b=!1;return(async()=>{try{let c,d=await 
+fetch("/api/anam-session",{method:"POST"});if(!d.ok)throw Error("Failed to create Anam 
+session.");let e=await d.json();if(!e.sessionToken)throw Error("Anam session token was not 
+returned.");if(b)return;if(c=e.sessionToken,(a=new ar(c,void 0,void 
+0)).addListener(s.MESSAGE_STREAM_EVENT_RECEIVED,a=>{if(b||!a.content?.trim())return;let 
+c="persona"===a.role?"ai":"user"===a.role?"candidate":null;if(!c)return;let d=ag.current[a.id],e=d?
+{...d,text:`${d.text}${a.content}`}:{id:a.id,speaker:c,text:a.content.trim(),time:am(ah.current)};"
+ai"===e.speaker&&!e.questionNumber&&e.text.includes("?")&&(ad.current+=1,e.questionNumber=ad.curren
+t,console.log("ANAM QUESTION DETECTED:",e.questionNumber,e.text)),ag.current[a.id]=e,u(b=>{let 
+c=b.findIndex(b=>b.id===a.id);if(-1===c)return[...b,e];let d=[...b];return 
+d[c]=e,d}),v.current=Object.values(ag.current),console.log("ANAM 
+STREAM:",c,a.content)}),a.addListener(s.MESSAGE_HISTORY_UPDATED,a=>{if(b)return;let 
+c=a.map(a=>{let 
+b="persona"===a.role?"ai":"user"===a.role?"candidate":null;if(!b||!a.content?.trim())return 
+null;let c=ag.current[a.id];return{id:a.id,speaker:b,text:a.content.trim(),time:c?.time??am(ah.curr
+ent),...c?.questionNumber!==void 0?{questionNumber:c.questionNumber}:{}}}).filter(a=>null!==a);c.fo
+rEach(a=>{ag.current[a.id]=a}),v.current=c,u(c),console.log("ANAM HISTORY:",c)}),await 
+a.streamToVideoElement("anam-video"),b){a.isStreaming()&&await 
+a.stopStreaming();return}console.log("SUCCESS: Anam live avatar connected."),console.log("SUCCESS: 
+Anam real-time transcript connected.")}catch(a){console.error("Anam connection error:",a)}})(),()=>
+{b=!0,a?.isStreaming()&&a.stopStreaming()}},[]),O)?(0,w.jsx)("main",{className:"min-h-screen 
+bg-[#dcebf3] px-5 py-10 text-[#10283d]",children:(0,w.jsx)("div",{className:"mx-auto flex 
+min-h-[80vh] max-w-2xl items-center justify-center",children:(0,w.jsxs)("section",{className:"flex 
+min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white p-8 
+text-center shadow-[0_20px_70px_rgba(18,69,89,0.12)] 
+md:p-12",children:[(0,w.jsx)("p",{className:"mt-6 text-xs font-bold font-satoshi uppercase 
+tracking-[0.2em] text-[#8195a8]",children:"Interview complete"}),(0,w.jsx)("p",{className:"mx-auto 
+mt-3 max-w-lg text-sm leading-6 text-[#667085]",children:U?"Your maximum interview time has been 
+reached. Please do not close this page. Your interview is being submitted and processed 
+automatically.":"Please click the Submit Interview button below to process and submit your 
+interview responses."}),(0,w.jsxs)("div",{className:"mt-8 grid grid-cols-2 
+gap-4",children:[(0,w.jsxs)("div",{className:"rounded-2xl border border-[#e2e8f0] bg-[#f7fafc] 
+p-5",children:[(0,w.jsx)("p",{className:"text-xs font-satoshi uppercase tracking-wide 
+text-[#98a2b3]",children:"Questions"}),(0,w.jsx)("p",{className:"mt-2 text-2xl 
+font-bold",children:e+1})]}),(0,w.jsxs)("div",{className:`rounded-2xl border p-5 
+${p?"border-red-200 bg-red-50":"border-[#e2e8f0] 
+bg-[#f7fafc]"}`,children:[(0,w.jsx)("p",{className:"text-xs font-satoshi uppercase tracking-wide 
+text-[#98a2b3]",children:"Duration"}),(0,w.jsx)("p",{className:`mt-2 text-2xl font-bold 
+${p?"text-red-600":""}`,children:am(n)})]})]}),p&&(0,w.jsxs)("div",{className:"mt-5 rounded-2xl 
+border border-red-200 bg-red-50 p-4 text-left",children:[(0,w.jsx)("p",{className:"text-sm 
+font-bold text-red-700",children:"Time limit exceeded"}),(0,w.jsx)("p",{className:"mt-1 text-sm 
+leading-6 text-red-600"})]}),U?(0,w.jsx)("div",{className:"mt-8 w-full rounded-xl bg-[#176f83] 
+px-6 py-4 text-sm font-bold text-white shadow-lg 
+shadow-[#176f83]/20",children:(0,w.jsx)("span",{className:"inline-flex items-center justify-center 
+gap-1",children:(0,w.jsx)("span",{children:"SUBMITTING... PLEASE DO NOT CLOSE THIS 
+PAGE"})})}):(0,w.jsx)("button",{onClick:aq,disabled:S,className:"mt-8 w-full rounded-xl 
+bg-[#176f83] px-6 py-4 text-sm font-bold text-white shadow-lg shadow-[#176f83]/20 transition 
+hover:bg-[#124559] disabled:cursor-not-allowed 
+disabled:opacity-50",children:S?(0,w.jsx)("span",{className:"inline-flex items-center 
+justify-center gap-1",children:(0,w.jsx)("span",{children:"SUBMITTING... PLEASE DO NOT CLOSE THIS 
+PAGE"})}):"SUBMIT INTERVIEW"})]})})}):(0,w.jsxs)("main",{className:"fixed inset-0 flex flex-col 
+overflow-hidden bg-[#dcebf3] 
+text-[#10283d]",children:[!Q&&null!==W&&(0,w.jsxs)("div",{className:"fixed inset-0 z-[9999] flex 
+items-center justify-center overflow-hidden bg-[#050b12]/95 
+backdrop-blur-sm",children:[(0,w.jsx)("div",{className:"absolute inset-0 bg-[radial-gradient(circle
+_at_center,rgba(34,211,238,0.12),transparent_45%)]"}),(0,w.jsx)("div",{className:"absolute left-0 
+right-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/40 
+to-transparent"}),(0,w.jsx)("div",{className:"absolute left-1/2 top-1/2 h-[430px] w-[430px] 
+-translate-x-1/2 -translate-y-1/2 rounded-full border 
+border-cyan-300/10"}),(0,w.jsx)("div",{className:"absolute left-1/2 top-1/2 h-[340px] w-[340px] 
+-translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/20 
+shadow-[0_0_100px_rgba(34,211,238,0.12)]"}),(0,w.jsx)("div",{className:"absolute left-1/2 top-1/2 
+h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 
+border-cyan-300/30"}),(0,w.jsxs)("div",{className:"relative z-10 flex flex-col 
+items-center",children:[(0,w.jsx)("div",{className:"flex h-[250px] w-[250px] items-center 
+justify-center rounded-full border-2 border-cyan-300/50 bg-[#071c29]/80 
+shadow-[0_0_90px_rgba(34,211,238,0.25)]",children:(0,w.jsx)("span",{className:"text-[165px] 
+font-black leading-none tracking-[-0.08em] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.6)] 
+md:text-[190px]",children:W})},W),(0,w.jsx)("p",{className:"mt-9 text-xl font-semibold 
+tracking-[0.18em] text-cyan-300 uppercase md:text-2xl",children:3===W?"Get ready":2===W?"Almost 
+there":"Let's begin"}),(0,w.jsx)("div",{className:"mt-3 flex h-8 items-center 
+gap-1",children:Array.from({length:31}).map((a,b)=>(0,w.jsx)("span",{className:"w-[2px] 
+rounded-full bg-cyan-300",style:{height:`${6+22*Math.abs(Math.sin(.75*b))}px`,opacity:.35+b%6*.1}},
+b))}),(0,w.jsx)("p",{className:"mt-2 text-[10px] font-bold font-satoshi uppercase 
+tracking-[0.35em] text-slate-500",children:"AI Interview 
+Session"})]})]}),(0,w.jsx)("header",{className:"shrink-0 border-b border-[#c7d7e2] bg-white/95 
+backdrop-blur",children:(0,w.jsxs)("div",{className:"mx-auto flex h-auto min-h-[72px] w-full 
+max-w-[1450px] flex-wrap items-center justify-between gap-3 px-3 sm:px-5 md:px-8 
+py-2",children:[(0,w.jsx)("div",{className:"flex 
+items-center",children:(0,w.jsxs)("div",{className:"relative -ml-16 flex items-center gap-3 
+overflow-hidden rounded-xl border border-[#5d9bb0]/40 bg-gradient-to-r from-[#0b3d4d] 
+via-[#176f83] to-[#17657a] px-4 py-2 shadow-lg 
+shadow-[#176f83]/30",children:[(0,w.jsxs)("span",{className:"relative flex h-3 
+w-3",children:[(0,w.jsx)("span",{className:"absolute inline-flex h-full w-full animate-ping 
+rounded-full bg-red-300 opacity-75"}),(0,w.jsx)("span",{className:"relative inline-flex h-3 w-3 
+rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.9)]"})]}),(0,w.jsxs)("div",{children:[(
+0,w.jsxs)("p",{className:"text-[9px] font-bold font-satoshi uppercase tracking-[0.2em] 
+text-[#b9d5df]",children:[" ","Live"]}),(0,w.jsx)("h1",{className:"text-sm font-bold 
+tracking-tight text-white font-satoshi md:text-base",children:"AI Interview 
+Session"})]})]})}),(0,w.jsxs)("div",{className:"ml-auto flex translate-x-16 items-stretch gap-2 
+md:gap-3",children:[(0,w.jsxs)("div",{className:"relative flex h-[58px] min-w-[150px] items-center 
+overflow-hidden rounded-xl border border-[#2d6579] bg-[#176f83] px-3.5 py-2 shadow-md 
+shadow-[#176f83]/15 font-satoshi",children:[(0,w.jsx)("div",{className:"absolute -right-5 -top-5 
+h-10 w-10 rounded-full 
+bg-white/10"}),(0,w.jsxs)("div",{className:"relative",children:[(0,w.jsx)("div",{className:"flex 
+items-center gap-2",children:(0,w.jsx)("p",{className:"text-[10px] font-bold font-satoshi 
+uppercase tracking-[0.14em] text-[#b9d5df] 
+font-satoshi",children:"Candidate"})}),(0,w.jsx)("p",{className:"mt-0.5 text-sm font-extrabold 
+tracking-tight text-white font-satoshi 
+font-satoshi",children:a})]})]}),(0,w.jsxs)("div",{className:`relative flex h-[58px] min-w-[150px] 
+items-center overflow-hidden rounded-xl border px-3.5 py-2 shadow-md font-satoshi 
+${p?"border-red-300 bg-red-600 shadow-red-600/20":"border-[#2d6579] bg-[#176f83] 
+shadow-[#176f83]/20"}`,children:[(0,w.jsx)("div",{className:"absolute -right-5 -top-5 h-10 w-10 
+rounded-full 
+bg-white/10"}),(0,w.jsxs)("div",{className:"relative",children:[(0,w.jsxs)("div",{className:"flex 
+items-center gap-2",children:[(0,w.jsx)("span",{className:`h-2.5 w-2.5 animate-pulse rounded-full 
+${p?"bg-white":"bg-red-400"}`}),(0,w.jsx)("p",{className:"text-[10px] font-bold font-satoshi 
+uppercase tracking-[0.14em] text-[#b9d5df] font-satoshi",children:"Interview 
+time"})]}),(0,w.jsxs)("div",{className:"mt-0.5 flex items-baseline 
+gap-1",children:[(0,w.jsx)("span",{className:"font-satoshi text-sm font-black tracking-tight 
+text-white font-satoshi",children:am(n)}),(0,w.jsx)("span",{className:"text-sm font-bold 
+text-[#b9d5df] font-satoshi",children:"/ 
+12:00"})]})]})]})]})]})}),(0,w.jsxs)("div",{className:"flex min-h-0 w-full flex-1 flex-col 
+overflow-hidden px-0 py-6 md:px-0 md:py-4",children:[(0,w.jsx)("div",{className:"mb-0 flex 
+flex-col gap-5 md:flex-row md:items-end md:justify-between"}),(0,w.jsxs)("div",{className:"grid 
+min-h-0 flex-1 grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[minmax(0,1.40fr)_minmax(310px,0.60fr)]",chi
+ldren:[(0,w.jsx)("section",{className:"flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden 
+rounded-3xl border border-[#c8d9e3] bg-white 
+shadow-[0_12px_45px_rgba(18,69,89,0.08)]",children:(0,w.jsxs)("div",{className:"flex min-h-0 
+min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white 
+shadow-[0_8px_35px_rgba(15,23,42,0.06)]",children:[(0,w.jsx)("div",{className:"shrink-0 border-b 
+border-[#dce8f0] bg-white px-6 py-5 md:px-8",children:(0,w.jsx)("div",{className:"flex 
+items-center justify-between gap-4",children:(0,w.jsxs)("div",{className:"flex min-w-0 
+items-center gap-4",children:[(0,w.jsx)("div",{className:"flex h-14 w-14 shrink-0 items-center 
+justify-center rounded-full bg-[#e8f2f6]",children:(0,w.jsx)("span",{className:"text-2xl font-bold 
+text-[#176f83]",children:"AI"})}),(0,w.jsxs)("div",{className:"min-w-0 
+leading-tight",children:[(0,w.jsx)("h2",{className:"text-base font-bold leading-tight 
+tracking-tight text-[#142d47]",children:"AI Interviewer"}),(0,w.jsxs)("div",{className:"mt-0 flex 
+items-center gap-2 leading-none",children:[(0,w.jsx)("span",{className:"h-2.5 w-2.5 rounded-full 
+bg-emerald-500"}),(0,w.jsx)("span",{className:"text-xs font-medium leading-none 
+text-[#4f7389]",children:M?"Listening to you":"Ready for your response"})]})]})]})})}),"           
+   ",(0,w.jsx)("div",{className:"shrink-0 border-b border-[#dce8f0] px-8 py-3 
+md:px-10",children:(0,w.jsxs)("div",{className:"flex items-center 
+gap-3",children:[(0,w.jsx)("div",{className:"flex h-10 w-10 shrink-0 items-center justify-center 
+rounded-full bg-[#e8f2f6]",children:(0,w.jsxs)("svg",{viewBox:"0 0 24 24",className:"h-6 w-6 text-[
+#176f83]",fill:"none",stroke:"currentColor",strokeWidth:"1.8",strokeLinecap:"round",strokeLinejoin:
+"round",children:[(0,w.jsx)("circle",{cx:"9",cy:"8",r:"3"}),(0,w.jsx)("path",{d:"M3.5 19c.5-3.2 
+2.5-5 5.5-5s5 1.8 5.5 5"}),(0,w.jsx)("path",{d:"M16 6.5a3 3 0 0 1 0 
+5.8"}),(0,w.jsx)("path",{d:"M17 14c2 .6 3.2 2.1 3.5 
+4"})]})}),(0,w.jsxs)("div",{children:[(0,w.jsx)("h2",{className:"text-lg font-bold tracking-tight 
+text-[#142d47]",children:"Conversation Panel"}),(0,w.jsx)("p",{className:"text-sm 
+text-[#607d8d]",children:"Your real-time conversation with the AI 
+interviewer"})]})]})}),(0,w.jsx)("div",{ref:af,className:"min-h-0 flex-1 overflow-y-auto 
+overscroll-contain border-t border-[#dce8f0] bg-white px-3 py-3 sm:px-5 md:px-8 
+lg:px-10",children:(0,w.jsxs)("div",{className:"mx-auto flex max-w-5xl flex-col 
+gap-1.5",children:[t.map(a=>"ai"===a.speaker?(0,w.jsxs)("div",{className:"flex items-start 
+gap-3",children:[(0,w.jsx)("div",{className:"flex h-10 w-10 shrink-0 items-center justify-center 
+rounded-full bg-[#e8f2f6]",children:(0,w.jsx)("span",{className:"text-base font-bold text-[#176f83]
+",children:"AI"})}),(0,w.jsx)("div",{className:"max-w-[78%]",children:(0,w.jsxs)("div",{className:"
+rounded-2xl border border-[#dce8f0] bg-white px-5 py-2 
+shadow-[0_2px_8px_rgba(15,23,42,0.03)]",children:["                            
+",a.questionNumber&&(0,w.jsxs)("span",{className:"mb-1 inline-flex rounded-full bg-[#e8f2f6] 
+px-2.5 py-1 text-xs font-extrabold text-[#176f83]",children:["Question 
+",a.questionNumber]}),(0,w.jsx)("p",{className:"text-[15px] font-medium leading-[1.3] 
+text-[#152d43]",children:a.text})]})})]},a.id):(0,w.jsx)("div",{className:"flex justify-end",childr
+en:(0,w.jsx)("div",{className:"max-w-[68%]",children:(0,w.jsxs)("div",{className:"rounded-2xl 
+bg-[#e8f2f6] px-5 py-2",children:[(0,w.jsx)("p",{className:"text-[15px] font-medium leading-[1.3] 
+text-[#176f83]",children:a.text}),(0,w.jsxs)("div",{className:"mt-1.5 flex items-center 
+justify-end gap-2",children:[(0,w.jsx)("span",{className:"text-xs font-medium 
+text-[#8195a8]"}),(0,w.jsx)("span",{className:"text-base font-bold 
+text-[#176f83]"})]})]})})},a.id)),(C||A)&&(0,w.jsx)("div",{className:"flex 
+justify-end",children:(0,w.jsxs)("div",{className:"w-full max-w-[68%] rounded-2xl bg-[#e8f2f6] 
+px-6 py-5",children:[(0,w.jsxs)("div",{className:"flex items-center 
+gap-3",children:[(0,w.jsx)("div",{className:"flex h-9 w-9 items-center 
+justify-center",children:"speaking"===q?(0,w.jsx)("span",{className:"text-[#176f83]",title:"AI spea
+king",children:"🔊"}):"listening"===q||M?(0,w.jsx)("span",{className:"text-[#176f83]",title:"Microp
+hone active",children:"🎤"}):(0,w.jsx)("span",{className:"text-[#8195a8]",title:"Microphone 
+ready",children:"🎤"})}),(0,w.jsxs)("div",{className:"flex min-w-0 flex-1 items-center 
+gap-3",children:[(0,w.jsx)("div",{className:"flex h-8 flex-1 items-center gap-[3px] overflow-hidden
+",children:[12,20,30,16,25,36,18,28,42,22,34,16,27,39,20,31,14,25,36,19,29,15,24,38,18,30,21,34,17,
+26].map((a,b)=>(0,w.jsx)("span",{className:`w-1 rounded-full bg-[#176f83] ${M?"animate-pulse":""}`,
+style:{height:`${a}px`,opacity:.45+b%4*.12}},b))}),("listening"===q||M)&&(0,w.jsx)("span",{classNam
+e:"h-2 w-2 shrink-0 rounded-full bg-red-500"})]})]}),(0,w.jsxs)("p",{className:"mt-2 text-sm 
+leading-6 text-[#38566c]",children:[C,A&&(0,w.jsxs)("span",{className:"text-[#8195a8]",children:[" 
+",A]})]})]})}),!Y&&(0,w.jsxs)("div",{className:"rounded-2xl border border-amber-200 bg-amber-50 
+px-5 py-4",children:[(0,w.jsx)("p",{className:"text-sm font-semibold 
+text-amber-800",children:"Live transcription is unavailable in this 
+browser."}),(0,w.jsx)("p",{className:"mt-1 text-xs leading-5 text-amber-700",children:"Your camera 
+and microphone recording can still 
+continue."})]}),0===t.length&&!C&&!A&&(0,w.jsx)("div",{className:"flex min-h-[220px] items-center j
+ustify-center",children:(0,w.jsxs)("div",{className:"text-center",children:[(0,w.jsx)("div",{classN
+ame:"mx-auto flex h-14 w-14 items-center justify-center rounded-full 
+bg-[#e8f2f6]",children:(0,w.jsx)("span",{className:"text-base font-bold 
+text-[#176f83]",children:"AI"})}),(0,w.jsx)("p",{className:"mt-4 text-sm font-bold 
+text-[#152d43]",children:"Preparing your interview"}),(0,w.jsx)("p",{className:"mt-1 text-xs 
+text-[#8195a8]",children:"The AI interviewer will begin 
+shortly."})]})})]})}),(0,w.jsx)("div",{className:"shrink-0 border-t border-[#dce8f0] bg-white px-8 
+py-3 md:px-10",children:(0,w.jsxs)("button",{type:"button",onClick:()=>void 
+al.current?.(),disabled:S||"processing"===q,className:"group mt-1 flex min-h-[52px] w-full 
+items-center justify-between rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-rose-600 px-6 
+py-3.5 text-sm font-extrabold tracking-wide text-white shadow-lg shadow-red-500/30 ring-1 
+ring-red-400/40 transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.01] 
+hover:from-red-700 hover:via-red-600 hover:to-rose-700 hover:shadow-xl hover:shadow-red-500/40 
+active:translate-y-0 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 
+disabled:hover:translate-y-0 disabled:hover:scale-100",children:[(0,w.jsx)("span",{children:"CLICK 
+HERE ONCE YOU HAVE FINISHED YOUR INTERVIEW TO SUBMIT YOUR 
+RESPONSE"}),(0,w.jsx)("span",{className:"ml-3 text-2xl font-bold transition-transform duration-200 
+group-hover:translate-x-1",children:"?"})]})}),"            
+"]})}),(0,w.jsxs)("aside",{className:"-translate-x-1 flex min-h-0 flex-col 
+gap-4",children:[(0,w.jsx)("div",{className:"min-h-0 flex-1 overflow-hidden rounded-3xl border 
+border-[#c8d9e3] bg-transparent 
+shadow-[0_12px_45px_rgba(18,69,89,0.14)]",children:(0,w.jsx)("div",{className:"relative h-full 
+min-h-0 overflow-hidden bg-[#111827]",children:(0,w.jsx)("video",{id:"anam-video",ref:m,autoPlay:!0
+,playsInline:!0,controls:!1,className:"absolute inset-0 z-10 h-full w-full object-fill"})})}),"    
+        ",(0,w.jsx)("div",{className:"min-h-0 flex-1 overflow-hidden rounded-3xl border 
+border-[#c8d9e3] bg-transparent 
+shadow-[0_12px_45px_rgba(18,69,89,0.14)]",children:(0,w.jsxs)("div",{className:"relative h-full 
+min-h-0 w-full overflow-hidden bg-black",children:[(0,w.jsxs)("div",{className:"absolute left-4 
+top-4 z-10 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 text-xs font-bold 
+tracking-wide text-white backdrop-blur-sm",children:[(0,w.jsx)("span",{className:"h-2 w-2 
+rounded-full bg-red-500"}),"LIVE"]}),(0,w.jsx)("video",{ref:$,autoPlay:!0,playsInline:!0,muted:!0,c
+lassName:`absolute inset-0 block h-full w-full object-fill 
+${E?"":"hidden"}`}),!E&&(0,w.jsx)("div",{className:"absolute inset-0 flex items-center justify-cent
+er",children:(0,w.jsxs)("div",{className:"text-center",children:[(0,w.jsx)("div",{className:"mx-aut
+o flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-xl font-bold 
+text-white",children:a.split(" 
+").map(a=>a[0]).slice(0,2).join("").toUpperCase()}),(0,w.jsx)("p",{className:"mt-1 text-sm 
+font-semibold text-white",children:"Camera off"})]})}),I&&(0,w.jsx)("div",{className:"absolute 
+inset-0 flex items-center justify-center bg-[#111827] p-6 
+text-center",children:(0,w.jsxs)("div",{children:[(0,w.jsx)("div",{className:"mx-auto flex h-12 
+w-12 items-center justify-center rounded-full bg-red-500/10 
+text-red-400",children:"!"}),(0,w.jsx)("p",{className:"mt-1 text-sm font-semibold 
+text-white",children:"Camera access required"}),(0,w.jsx)("p",{className:"mt-2 text-xs leading-5 te
+xt-slate-400",children:I}),(0,w.jsx)("button",{type:"button",onClick:()=>window.location.reload(),c
+lassName:"mt-2 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#10283d]",children:"Try again"
+})]})})]})}),(0,w.jsx)("div",{className:"mt-3",children:(0,w.jsx)("div",{className:"mt-1"})})]})]})
+]})]})}],92406)}];
+  .next\server\chunks\ssr\src_app_interview_voice_page_tsx_1cqd78-._.js:2:
+  .next\server\chunks\ssr\src_app_interview_voice_page_tsx_1cqd78-._.js:3://# 
+sourceMappingURL=src_app_interview_voice_page_tsx_1cqd78-._.js.map
+
+

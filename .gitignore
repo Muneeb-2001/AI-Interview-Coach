@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env.local
+backups/
+*.zip
+*.backup*
+*.before-*
+*.tsbuildinfo
+*.pyc
+__pycache__/
+*.bak
+*.backup
+*.backup*
+*.before-*
+.vercel
+.env*

@@ -1,0 +1,104 @@
+﻿import { NextRequest, NextResponse } from "next/server";
+
+const N8N_WEBHOOK_URL =
+  "https://n8n.domingogarcia.info/webhook/c8d88330-f3bb-4c74-bf6d-94da48927ab8";
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    const name = String(body.name || "");
+    const email = String(body.email || "");
+    const transcript = String(body.transcript || "");
+    const questionCount = Number(body.questionCount || 0);
+    const timeTaken = Number(body.timeTaken || 0);
+    const timeExceeded = Boolean(body.timeExceeded);
+    const overtimeSeconds = Number(body.overtimeSeconds || 0);
+    const recordingUrl = String(body.recordingUrl || "");
+
+    if (!name || !email || !transcript.trim()) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Missing required fields",
+        },
+        { status: 400 },
+      );
+    }
+
+    const submittedAt = new Date().toISOString();
+
+    const payload = {
+      name,
+      email,
+      transcript: transcript.trim(),
+      questionCount,
+      timeTaken,
+      timeExceeded,
+      overtimeSeconds,
+      submittedAt,
+      recordingUrl,
+    };
+
+    console.log("Sending completed interview to n8n:", {
+      name,
+      email,
+      questionCount,
+      transcriptLength: payload.transcript.length,
+      recordingUrl: recordingUrl || "none",
+    });
+
+    const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+    });
+
+    const n8nText = await n8nResponse.text();
+
+    if (!n8nResponse.ok) {
+      console.error(
+        "n8n webhook failed:",
+        n8nResponse.status,
+        n8nText,
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          error: "n8n webhook failed",
+          status: n8nResponse.status,
+          details: n8nText,
+        },
+        { status: 502 },
+      );
+    }
+
+    console.log("Interview successfully sent to n8n");
+
+    return NextResponse.json({
+      success: true,
+      message: "Interview submitted successfully",
+      data: {
+        name,
+        email,
+        questionCount,
+        recordingUploaded: Boolean(recordingUrl),
+        recordingUrl: recordingUrl || null,
+      },
+    });
+  } catch (error) {
+    console.error("Error submitting interview:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to submit interview",
+      },
+      { status: 500 },
+    );
+  }
+}

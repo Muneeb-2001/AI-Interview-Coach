@@ -61,6 +61,8 @@ export default function Home() {
         console.warn("Airtable sync warning:", airtableError.error);
       }
 
+      sessionStorage.setItem("interviewConfirmationEntry", "true");
+
       router.push(
         "/interview?name=" +
           encodeURIComponent(formData.name) +
@@ -548,6 +550,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#7890a0",
   },
 };
+
 
 
 

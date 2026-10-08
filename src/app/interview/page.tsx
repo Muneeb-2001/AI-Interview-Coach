@@ -1,9 +1,19 @@
 ﻿"use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { Suspense } from "react";
 
 function InterviewConfirmationContent() {
+  useEffect(() => {
+    const entryGranted = sessionStorage.getItem("interviewConfirmationEntry");
+
+    if (entryGranted !== "true") {
+      window.location.replace("/");
+      return;
+    }
+  }, []);
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -79,6 +89,8 @@ function InterviewConfirmationContent() {
         localStorage.setItem('candidateName', candidateName);
         localStorage.setItem('candidateEmail', candidateEmail);
         localStorage.setItem('anamSessionToken', sessionToken);
+        sessionStorage.removeItem('interviewConfirmationEntry');
+        sessionStorage.setItem('interviewEntryGranted', 'true');
 
         const targetUrl = `/interview/voice?name=${encodeURIComponent(candidateName)}&email=${encodeURIComponent(candidateEmail)}`;
 
@@ -386,6 +398,9 @@ const styles: Record<string, React.CSSProperties> = {
     fontFamily: "inherit",
   },
 };
+
+
+
 
 
 

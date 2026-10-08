@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient, AnamEvent } from "@anam-ai/js-sdk";
@@ -394,6 +394,13 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
   );
 
   useEffect(() => {
+    const entryGranted = sessionStorage.getItem("interviewEntryGranted");
+
+    if (entryGranted !== "true") {
+      window.location.replace("/");
+      return;
+    }
+
     const params = new URLSearchParams(window.location.search);
 
     const candidateName = params.get("name");
@@ -1668,6 +1675,8 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
+
 
 
 

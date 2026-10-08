@@ -139,33 +139,33 @@ function InterviewConfirmationContent() {
 
             <div style={styles.rulesList}>
               <div style={styles.ruleItem}>
-                <span style={styles.bullet}>â€¢</span>
+                <span style={styles.bullet}>•</span>
                 <span style={styles.ruleText}>
                   You have <strong style={styles.highlight}>10 minutes</strong> to complete all questions.
                 </span>
               </div>
               <div style={styles.ruleItem}>
-                <span style={styles.bullet}>â€¢</span>
+                <span style={styles.bullet}>•</span>
                 <span style={styles.ruleText}>
                   Make sure you use a laptop or PC for the best interview experience.
                 </span>
               </div>
               <div style={styles.ruleItem}>
-                <span style={styles.bullet}>â€¢</span>
+                <span style={styles.bullet}>•</span>
                 <span style={styles.ruleText}>
                   Ensure your microphone and camera are connected and working properly.
                 </span>
               </div>
               <div style={styles.ruleItem}>
-                <span style={styles.bullet}>â€¢</span>
+                <span style={styles.bullet}>•</span>
                 <span style={styles.ruleText}>
                   Ensure you have a stable internet connection before starting.
                 </span>
               </div>
               <div style={styles.ruleItem}>
-                <span style={styles.bullet}>â€¢</span>
+                <span style={styles.bullet}>•</span>
                 <span style={styles.ruleText}>
-                  Prepare to speak naturally as in a real interviewâ€”your AI coach will tailor questions and evaluate your answers live.
+                  Prepare to speak naturally as in a real interview—your AI coach will tailor questions and evaluate your answers live.
                 </span>
               </div>
             </div>
@@ -386,6 +386,8 @@ const styles: Record<string, React.CSSProperties> = {
     fontFamily: "inherit",
   },
 };
+
+
 
 
 

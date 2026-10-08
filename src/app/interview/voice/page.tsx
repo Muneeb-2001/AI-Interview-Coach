@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient, AnamEvent } from "@anam-ai/js-sdk";
@@ -83,7 +83,6 @@ export default function VoiceInterviewPage() {
     speakingRef.current = false;
     answerListeningRef.current = true;
 
-    setIsInteractionVideo(true);
     setStatus(isOvertime ? "overtime" : "listening");
 
     const recognition =

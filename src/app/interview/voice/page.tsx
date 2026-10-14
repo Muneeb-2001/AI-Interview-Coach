@@ -1365,7 +1365,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                       </span>
                     </div>
 
-                    <div className="min-w-0 leading-tight">
+                    <div className="min-w-0 flex-1 leading-tight">
                       <h2 className="text-base font-bold leading-tight tracking-tight text-[#142d47]">
                         AI Interviewer
                       </h2>
@@ -1549,15 +1549,15 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                   disabled={status === "processing" || status === "complete"}
                   className="group mx-auto flex min-h-[36px] w-full -translate-y-1.5 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-1 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  <div className="min-w-0 leading-tight">
-                    <div className="text-sm font-bold tracking-normal">
+                  <div className="min-w-0 flex-1 leading-tight">
+                    <div className="whitespace-normal break-words text-sm font-bold tracking-normal">
                       {status === "processing"
                         ? "Processing response..."
                         : "CLICK HERE ONCE YOU HAVE COMPLETED YOUR INTERVIEW TO PROCESS YOUR RESPONSE"}
                     </div>
                   </div>
 
-                  <span className="ml-6 flex shrink-0 -translate-y-1.5 items-center text-5xl font-black leading-none tracking-widest text-white drop-shadow-[0_3px_10px_rgba(255,255,255,0.45)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110">&#8594;</span></button>
+                  <span className="ml-2 flex shrink-0 -translate-y-1.5 items-center text-5xl font-black leading-none tracking-widest text-white drop-shadow-[0_3px_10px_rgba(255,255,255,0.45)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110">&#8594;</span></button>
               </div>            </div>
           </section>
 
@@ -1677,6 +1677,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
 
 
 

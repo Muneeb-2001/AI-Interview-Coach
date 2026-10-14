@@ -1565,7 +1565,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
           <aside className="-translate-x-1 flex min-h-0 flex-col gap-4">
 
             {/* ANAM INTERVIEW VIDEO */}
-            <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border border-[#c8d9e3] bg-[#10283d] shadow-[0_12px_45px_rgba(18,69,89,0.14)]">
+            <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border border-[#c8d9e3] bg-[#10283d] shadow-[0_12px_45px_rgba(18,69,89,0.14)]" style={{ width: "min(63vw, 1100px)", maxWidth: "none", alignSelf: "flex-end" }}>
               <div className="relative h-full min-h-0 overflow-hidden bg-[#111827]">
                 {!interviewStarted ? (
                   <img
@@ -1676,6 +1676,11 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
+
+
+
+
 
 
 

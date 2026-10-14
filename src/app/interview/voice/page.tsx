@@ -1657,6 +1657,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                     type="button"
                     onClick={startInterview}
                     disabled={interviewStarted || completed}
+                    style={{ width: "calc(100% + 520px)", maxWidth: "none", boxSizing: "border-box", transform: "translateX(-520px)" }}
                     className="flex min-h-[64px] w-full items-center justify-center rounded-xl border-2 border-[#2d6579] bg-[#176f83] px-5 py-3 text-sm font-bold leading-tight text-white shadow-lg shadow-[#176f83]/40 transition hover:bg-[#1b5d73] hover:shadow-[#176f83]/60 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
                   >
                     {!interviewStarted ? (
@@ -1676,6 +1677,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
 
 
 

@@ -1268,7 +1268,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
         <div className="mx-auto flex h-auto min-h-[72px] w-full max-w-[1450px] flex-wrap items-center justify-between gap-3 px-3 sm:px-5 md:px-8 py-2">
           {/* LEFT */}
           <div className="flex items-center">
-            <div className="relative -ml-16 flex items-center gap-3 overflow-hidden rounded-xl border border-[#5d9bb0]/40 bg-gradient-to-r from-[#0b3d4d] via-[#176f83] to-[#17657a] px-4 py-2 shadow-lg shadow-[#176f83]/30">
+            <div className="relative -ml-16 flex items-center gap-3 overflow-hidden rounded-xl border border-[#5d9bb0]/40 bg-[#176f83] px-4 py-2 shadow-lg shadow-[#176f83]/30">
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-300 opacity-75"></span>
                 <span className="relative inline-flex h-3 w-3 rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.9)]"></span>
@@ -1547,10 +1547,10 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                   type="button"
                   onClick={submitInterview}
                   disabled={status === "processing" || status === "complete"}
-                  className="group mx-auto flex min-h-[42px] w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-2 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="group mx-auto flex min-h-[36px] w-full -translate-y-1.5 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-1 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <div className="min-w-0 leading-tight">
-                    <div className="whitespace-nowrap text-[11px] font-bold tracking-normal sm:text-xs lg:text-[11px] xl:text-xs">
+                    <div className="whitespace-nowrap text-sm font-bold tracking-normal">
                       {status === "processing"
                         ? "Processing response..."
                         : "CLICK HERE ONCE YOU HAVE COMPLETED YOUR INTERVIEW TO PROCESS YOUR RESPONSE"}
@@ -1677,6 +1677,13 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
+
+
+
+
+
+
 
 
 

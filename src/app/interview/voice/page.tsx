@@ -1550,7 +1550,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                   className="group mx-auto flex min-h-[36px] w-full -translate-y-1.5 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-1 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <div className="min-w-0 leading-tight">
-                    <div className="whitespace-nowrap text-sm font-bold tracking-normal">
+                    <div className="text-sm font-bold tracking-normal">
                       {status === "processing"
                         ? "Processing response..."
                         : "CLICK HERE ONCE YOU HAVE COMPLETED YOUR INTERVIEW TO PROCESS YOUR RESPONSE"}
@@ -1677,6 +1677,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
 
 
 

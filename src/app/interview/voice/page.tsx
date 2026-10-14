@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient, AnamEvent } from "@anam-ai/js-sdk";
@@ -1351,10 +1351,10 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
         {/* MAIN INTERVIEW GRID */}
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[minmax(0,1.40fr)_minmax(310px,0.60fr)]">
           {/* LEFT */}
-          <section className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_12px_45px_rgba(18,69,89,0.08)]">
+          <section className="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_12px_45px_rgba(18,69,89,0.08)]" style={{ width: "50%", justifySelf: "start", marginLeft: "10px" }}>
             {/* PROFESSIONAL INTERVIEW CONVERSATION */}
 
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)]">
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] lg:w-[90%] lg:flex-none">
               {/* AI HEADER */}
               <div className="shrink-0 border-b border-[#dce8f0] bg-white px-6 py-5 md:px-8">
                 <div className="flex items-center justify-between gap-4">
@@ -1542,12 +1542,12 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
               </div>
 
               {/* FINISH ANSWER ACTION */}
-              <div className="shrink-0 border-t border-[#dce8f0] bg-white px-8 py-3 md:px-10">
+              <div className="mx-auto shrink-0 rounded-xl border border-[#c8d9e3] bg-[#eaf3f7] px-3 py-3 md:px-4" style={{ width: "360px", maxWidth: "100%", boxSizing: "border-box" }}>
                 <button
                   type="button"
                   onClick={submitInterview}
                   disabled={status === "processing" || status === "complete"}
-                  className="group mt-1 flex min-h-[36px] w-full items-center justify-between rounded-xl bg-red-600 px-5 py-1 text-left text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="group mt-1 mx-auto flex min-h-[36px] w-full items-center justify-between rounded-xl bg-red-600 px-5 py-1 text-left text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <div className="min-w-0 leading-tight">
                     <div className="text-sm font-bold tracking-wide">

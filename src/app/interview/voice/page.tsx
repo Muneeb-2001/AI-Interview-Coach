@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient, AnamEvent } from "@anam-ai/js-sdk";
@@ -1542,15 +1542,15 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
               </div>
 
               {/* FINISH ANSWER ACTION */}
-              <div className="mx-auto shrink-0 rounded-xl border border-[#c8d9e3] bg-[#eaf3f7] px-3 py-3 md:px-4" style={{ width: "360px", maxWidth: "100%", boxSizing: "border-box" }}>
+              <div className="mt-auto w-full shrink-0 px-3 pb-4 pt-3 md:px-4">
                 <button
                   type="button"
                   onClick={submitInterview}
                   disabled={status === "processing" || status === "complete"}
-                  className="group mt-1 mx-auto flex min-h-[36px] w-full items-center justify-between rounded-xl bg-red-600 px-5 py-1 text-left text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="group mx-auto flex min-h-[42px] w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-2 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <div className="min-w-0 leading-tight">
-                    <div className="text-sm font-bold tracking-wide">
+                    <div className="whitespace-nowrap text-[11px] font-bold tracking-normal sm:text-xs lg:text-[11px] xl:text-xs">
                       {status === "processing"
                         ? "Processing response..."
                         : "CLICK HERE ONCE YOU HAVE COMPLETED YOUR INTERVIEW TO PROCESS YOUR RESPONSE"}
@@ -1584,11 +1584,9 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                     className="absolute inset-0 h-full w-full object-fill"
                   />
                 )}
-              </div>
-            </div>
 
             {/* CANDIDATE VIDEO */}
-            <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border border-[#c8d9e3] bg-[#10283d] shadow-[0_12px_45px_rgba(18,69,89,0.14)]">
+            <div className="absolute overflow-hidden rounded-xl border-2 border-white/80 bg-[#10283d] shadow-xl" style={{ position: "absolute", right: "16px", bottom: "16px", width: "160px", height: "120px", zIndex: 20, boxSizing: "border-box" }}>
 
               <div className="relative min-h-0 flex-1 overflow-hidden bg-[#111827]">
                 <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 text-xs font-bold tracking-wide text-white backdrop-blur-sm">
@@ -1601,7 +1599,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                   autoPlay
                   playsInline
                   muted
-                  className={`h-full w-full object-contain ${
+                  className={`h-full w-full object-cover ${
                     cameraOn ? "" : "hidden"
                   }`}
                 />
@@ -1650,6 +1648,9 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
 
           </div>
 
+              </div>
+            </div>
+
               <div className="mt-3">
                 <div className="mt-1">
                   <button
@@ -1675,6 +1676,15 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
 
 
 

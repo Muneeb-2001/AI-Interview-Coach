@@ -1258,7 +1258,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
             </div>
 
             <p className="mt-2 text-[10px] font-bold font-satoshi uppercase tracking-[0.35em] text-slate-500">
-              AI Interview Session
+              AI Coaching Session
             </p>
           </div>
         </div>
@@ -1281,7 +1281,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                 </p>
 
                 <h1 className="text-sm font-bold tracking-tight text-white font-satoshi md:text-base">
-                  AI Interview Session
+                  AI Coaching Session
                 </h1>
               </div>
             </div>

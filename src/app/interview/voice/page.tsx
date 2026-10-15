@@ -1374,7 +1374,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
 >
             {/* PROFESSIONAL INTERVIEW CONVERSATION */}
 
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] lg:w-[90%] lg:flex-none">
+            <div className="h-[582.2px] min-h-0 min-w-0 w-full flex-none flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] lg:w-[90%]">
               {/* AI HEADER */}
               <div className="shrink-0 border-b border-[#dce8f0] bg-white px-6 py-5 md:px-8">
                 <div className="flex items-center justify-between gap-4">

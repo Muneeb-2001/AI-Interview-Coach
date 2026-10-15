@@ -1351,7 +1351,27 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
         {/* MAIN INTERVIEW GRID */}
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[minmax(0,1.40fr)_minmax(310px,0.60fr)]">
           {/* LEFT */}
-          <section className="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_12px_45px_rgba(18,69,89,0.08)]" style={{ width: "50%", justifySelf: "start", marginLeft: "10px" }}>
+          <section
+  className="flex min-h-0 min-w-0 flex-col overflow-hidden border border-[#c8d9e3] bg-white shadow-[0_12px_45px_rgba(18,69,89,0.08)]"
+  style={{
+    width: "min(598px, 100%)",
+    maxWidth: "100%",
+    boxSizing: "border-box",
+    justifySelf: "start",
+    marginLeft: "10px",
+    borderTopLeftRadius: "24px",
+    borderTopRightRadius: "30px",
+    borderBottomLeftRadius: "0px",
+    borderBottomRightRadius: "0px",
+    background: "transparent",
+    borderWidth: "medium",
+    borderStyle: "none",
+    borderColor: "currentColor",
+    borderImage: "none",
+    boxShadow: "none",
+    clipPath: "inset(0 round 30px)",
+  }}
+>
             {/* PROFESSIONAL INTERVIEW CONVERSATION */}
 
             <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] lg:w-[90%] lg:flex-none">

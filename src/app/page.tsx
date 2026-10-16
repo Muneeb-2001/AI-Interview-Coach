@@ -17,8 +17,32 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
+
+    // Require all candidate information before proceeding.
+    if (!formData.name.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    const normalizedEmail = formData.email.trim();
+    if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!cvFile) {
+      setError("Please upload your resume (PDF or DOC/DOCX).");
+      return;
+    }
+
+    const fileExtension = cvFile.name.split(".").pop()?.toLowerCase();
+    if (!fileExtension || !["pdf", "doc", "docx"].includes(fileExtension)) {
+      setError("Please upload your resume in PDF, DOC, or DOCX format.");
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const n8nPayload = new FormData();
@@ -550,6 +574,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#7890a0",
   },
 };
+
 
 
 

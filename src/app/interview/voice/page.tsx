@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient, AnamEvent } from "@anam-ai/js-sdk";
@@ -159,6 +159,9 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
   const anamClientRef = useRef<ReturnType<typeof createClient> | null>(null);
   const anamVideoRef = useRef<HTMLVideoElement | null>(null);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [transcriptMinimized, setTranscriptMinimized] = useState(false);
+const [conversationCollapsed, setConversationCollapsed] = useState(false);
+  const [transcriptMaximized, setTranscriptMaximized] = useState(false);
   const detectedQuestionIdsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
@@ -1136,7 +1139,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
   
 
   return (
-      <main className="min-h-screen bg-[#dcebf3] px-5 py-10 text-[#10283d]">
+      <main className="min-h-screen bg-[#dcebf3] bg-[linear-gradient(180deg,#eaf6fc_0%,#dcebf3_45%,#c6eaf2_100%)] relative px-5 py-10 text-[#10283d]">
         <div className="mx-auto flex min-h-[80vh] max-w-2xl items-center justify-center">
           <section className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white p-8 text-center shadow-[0_20px_70px_rgba(18,69,89,0.12)] md:p-12">
             <p className="mt-6 text-xs font-bold font-satoshi uppercase tracking-[0.2em] text-[#8195a8]">
@@ -1213,7 +1216,16 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     );
   }
   return (
-    <main className="fixed inset-0 flex flex-col overflow-hidden bg-[#dcebf3] text-[#10283d]">
+    <main className="fixed isolate inset-0 flex flex-col overflow-hidden bg-[#a9deeb] text-[#10283d]" style={{ backgroundImage: "linear-gradient(180deg, #eaf6fc 0%, #dcebf3 28%, #a9deeb 65%, #55bfd2 100%)" }}>
+      {/* SOFT WAVE BACKGROUND */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#eaf6fc_0%,#dcebf3_35%,#a9deeb_68%,#55bfd2_100%)]" />
+        <svg className="absolute bottom-0 left-0 h-[70%] w-full" viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 150 C240 70 390 230 650 170 S1080 60 1440 145 L1440 500 L0 500 Z" fill="#a9deeb" fillOpacity="0.42" />
+          <path d="M0 235 C220 150 420 300 700 230 S1120 145 1440 220 L1440 500 L0 500 Z" fill="#79cddd" fillOpacity="0.35" />
+          <path d="M0 320 C280 240 450 365 760 305 S1190 245 1440 315 L1440 500 L0 500 Z" fill="#55bfd2" fillOpacity="0.25" />
+        </svg>
+      </div>
       {!endedDueToNoResponse && countdown !== null && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#050b12]/95 backdrop-blur-sm">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.12),transparent_45%)]" />
@@ -1288,6 +1300,18 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
           </div>
 
           <div className="ml-auto flex translate-x-16 items-stretch gap-2 md:gap-3">
+            {/* TOTAL QUESTIONS */}
+            <div className="relative flex h-[58px] min-w-[150px] items-center overflow-hidden rounded-xl border border-[#2d6579] bg-[#176f83] px-3.5 py-2 shadow-md shadow-[#176f83]/20 font-satoshi">
+              <div className="absolute -right-5 -top-5 h-10 w-10 rounded-full bg-white/10" />
+              <div className="relative">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#b9d5df]">
+                  Total Questions
+                </p>
+                <p className="mt-0.5 text-sm font-extrabold tracking-tight text-white">
+                  5
+                </p>
+              </div>
+            </div>
             {/* CANDIDATE */}
             <div className="relative flex h-[58px] min-w-[150px] items-center overflow-hidden rounded-xl border border-[#2d6579] bg-[#176f83] px-3.5 py-2 shadow-md shadow-[#176f83]/15 font-satoshi">
               <div className="absolute -right-5 -top-5 h-10 w-10 rounded-full bg-white/10" />
@@ -1344,7 +1368,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
         </div>
       </header>
 
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden px-0 py-6 md:px-0 md:py-4">
+      <div className="flex min-h-0 w-full flex-1 flex-col overflow-visible px-0 py-6 md:px-0 md:py-4">
         {/* TITLE */}
         <div className="mb-0 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"></div>
 
@@ -1352,9 +1376,9 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[minmax(0,1.40fr)_minmax(310px,0.60fr)]">
           {/* LEFT */}
           <section
-  className="flex min-h-0 min-w-0 flex-col overflow-hidden border border-[#c8d9e3] bg-white shadow-[0_12px_45px_rgba(18,69,89,0.08)]"
+  className="relative flex h-full min-h-0 min-w-0 flex-col overflow-visible"
   style={{
-    width: "min(598px, 100%)",
+    width: "min(610px, 100%)",
     maxWidth: "100%",
     boxSizing: "border-box",
     justifySelf: "start",
@@ -1369,56 +1393,34 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
     borderColor: "currentColor",
     borderImage: "none",
     boxShadow: "none",
-    clipPath: "inset(0 round 30px)",
+    clipPath: "none",
   }}
 >
+            <button
+              type="button"
+              onClick={() => setConversationCollapsed(value => !value)}
+              aria-label={conversationCollapsed ? "Expand conversation panel" : "Collapse conversation panel"}
+              title={conversationCollapsed ? "Expand conversation" : "Collapse conversation"}
+              className="absolute left-3 top-2 z-50 flex min-h-14 min-w-12 items-center justify-center gap-2 rounded-xl border-2 border-white bg-[#176f83] px-4 py-3 text-sm font-bold text-white shadow-[0_8px_24px_rgba(23,111,131,0.45)] ring-2 ring-[#176f83]/20 transition-all duration-200 hover:scale-105 hover:bg-[#105768] active:scale-95 whitespace-nowrap"
+            >
+              {conversationCollapsed ? "Show chat  >" : "<  Hide chat"}
+            </button>
             {/* PROFESSIONAL INTERVIEW CONVERSATION */}
 
             <div
-  className="flex !h-[582.2px] min-h-0 min-w-0 w-full flex-none flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] lg:w-[90%]"
-  style={{ height: "582.2px" }}
+              className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-3xl border border-[#c8d9e3] bg-white shadow-[0_8px_35px_rgba(15,23,42,0.06)] w-full lg:w-full lg:mr-[-12px]"
+              style={{ display: conversationCollapsed ? "none" : "flex" }}
 >
-              {/* AI HEADER */}
-              <div className="shrink-0 border-b border-[#dce8f0] bg-white px-6 py-5 md:px-8">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex min-w-0 items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#e8f2f6]">
-                      <span className="text-2xl font-bold text-[#176f83]">
-                        AI
-                      </span>
-                    </div>
-
-                    <div className="min-w-0 flex-1 leading-tight">
-                      <h2 className="text-base font-bold leading-tight tracking-tight text-[#142d47]">
-                        AI Interviewer
-                      </h2>
-
-                      <div className="mt-0 flex items-center gap-2 leading-none">
-                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-
-                        <span className="text-xs font-medium leading-none text-[#4f7389]">
-                          {recording
-                            ? "Listening to you"
-                            : "Ready for your response"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* QUESTION PROGRESS */}
-                  <div className="hidden shrink-0 items-center gap-5 rounded-2xl border border-[#dce8f0] bg-[#f7fafc] px-5 py-3 sm:flex">
-                    <p className="text-xs font-bold text-[#152d43]">
-                      Total Questions : 5
-                    </p>
-                  </div>
-                </div>
+              
+{/* LIVE CONVERSATION HEADING */}
+              <div className="pointer-events-none absolute left-1/2 top-2 z-10 -translate-x-1/2 whitespace-nowrap rounded-xl border border-[#2d6579] bg-[#176f83] px-6 py-2.5 text-center text-lg font-extrabold tracking-wide text-white shadow-lg shadow-[#176f83]/30 font-satoshi">
+                Live Conversation
               </div>
-
 
               {/* CONVERSATION */}
               <div
                 ref={messagesRef}
-                className="min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-[#dce8f0] bg-white px-3 py-3 sm:px-5 md:px-8 lg:px-10"
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-[#dce8f0] bg-white px-3 pt-[102px] pb-3 sm:px-5 md:px-8 lg:px-10" style={{ display: transcriptMinimized ? "none" : "block" }}
               >
                 <div className="mx-auto flex max-w-5xl flex-col gap-1.5">
                   {/* EXISTING MESSAGES */}
@@ -1543,7 +1545,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                   {messages.length === 0 &&
                     !answerTranscript &&
                     !liveTranscript && (
-                      <div className="flex min-h-[220px] items-center justify-center">
+                      <div className="flex min-h-[220px] items-center justify-center" style={{ transform: "translateY(200px)" }}>
                         <div className="text-center">
                           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f2f6]">
                             <span className="text-base font-bold text-[#176f83]">
@@ -1551,12 +1553,13 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                             </span>
                           </div>
 
+                          
                           <p className="mt-4 text-sm font-bold text-[#152d43]">
                             Preparing your interview
                           </p>
 
                           <p className="mt-1 text-xs text-[#8195a8]">
-                            The AI interviewer will begin shortly.
+                            The AI coaching session will begin shortly.
                           </p>
                         </div>
                       </div>
@@ -1564,35 +1567,21 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                 </div>
               </div>
 
-              {/* FINISH ANSWER ACTION */}
-              <div className="mt-auto w-full shrink-0 px-3 pb-4 pt-3 md:px-4">
-                <button
-                  type="button"
-                  onClick={submitInterview}
-                  disabled={status === "processing" || status === "complete"}
-                  className="group mx-auto flex min-h-[36px] w-full -translate-y-1.5 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-1 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-red-500/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <div className="min-w-0 flex-1 leading-tight">
-                    <div className="whitespace-normal break-words text-sm font-bold tracking-normal">
-                      {status === "processing"
-                        ? "Processing response..."
-                        : "CLICK HERE ONCE YOU HAVE COMPLETED YOUR INTERVIEW TO PROCESS YOUR RESPONSE"}
-                    </div>
-                  </div>
-
-                  <span className="ml-2 flex shrink-0 -translate-y-1.5 items-center text-5xl font-black leading-none tracking-widest text-white drop-shadow-[0_3px_10px_rgba(255,255,255,0.45)] transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110">&#8594;</span></button>
-              </div>            </div>
+            </div>
           </section>
 
           {/* RIGHT VIDEO */}
-          <aside className="-translate-x-1 flex min-h-0 flex-col gap-4">
+          <aside
+  className="flex min-h-0 min-w-0 flex-col gap-4"
+>
 
             {/* ANAM INTERVIEW VIDEO */}
-            <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border border-[#c8d9e3] bg-[#10283d] shadow-[0_12px_45px_rgba(18,69,89,0.14)]" style={{ width: "min(63vw, 1100px)", maxWidth: "none", alignSelf: "flex-end" }}>
+            <div className="min-h-0 flex-1 overflow-hidden rounded-3xl border border-[#c8d9e3] bg-[#10283d] shadow-[0_12px_45px_rgba(18,69,89,0.14)]" style={conversationCollapsed ? { position: "fixed", left: "50%", top: "calc(50vh - 35px)", transform: "translate(-50%, -50%)", width: "min(44.5vw, 820px)", height: "min(25.5vw, 465px)", maxWidth: "calc(100vw - 24px)", minWidth: 0, zIndex: 40, flex: "none" } : { position: "fixed", left: "calc(70% + 10px)", top: "calc(50vh - 65px)", transform: "translate(-50%, -50%)", width: "min(44.5vw, 820px)", height: "min(25.5vw, 465px)", maxWidth: "calc(100vw - 24px)", minWidth: 0, zIndex: 40, flex: "none" }}>
               <div className="relative h-full min-h-0 overflow-hidden bg-[#111827]">
+
                 {!interviewStarted ? (
                   <img
-                    src="/anum-pic.jpg"
+                    src="/anum-avatar.png"
                     alt="Interview avatar"
                     className="absolute inset-0 h-full w-full object-fill"
                   />
@@ -1604,7 +1593,7 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
                     playsInline
                     muted={false}
                     controls={false}
-                    className="absolute inset-0 h-full w-full object-fill"
+                    className="absolute inset-0 h-full w-full object-fill "
                   />
                 )}
 
@@ -1674,14 +1663,14 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
               </div>
             </div>
 
-              <div className="mt-3">
-                <div className="mt-1">
+              <div className="mt-3 self-end" style={conversationCollapsed ? { position: "fixed", left: "50%", top: "calc(50vh + min(12.75vw, 232px) - 20px)", transform: "translateX(-50%)", bottom: "auto", zIndex: 30, width: "min(46vw, 850px)", maxWidth: "calc(100vw - 24px)", boxSizing: "border-box", flexShrink: 0, marginTop: 0 } : { position: "fixed", left: "calc(70% + 10px)", top: "calc(50vh + min(9vw, 167px) + 16px)", transform: "translateX(-50%)", bottom: "auto", zIndex: 30, width: "min(46vw, 850px)", maxWidth: "none", boxSizing: "border-box", flexShrink: 0, marginTop: 0 }}>
+                <div className="mt-1 w-full">
                   <button
                     type="button"
                     onClick={startInterview}
                     disabled={interviewStarted || completed}
-                    style={{ width: "calc(100% + 520px)", maxWidth: "none", boxSizing: "border-box", transform: "translateX(-520px)" }}
-                    className="flex min-h-[64px] w-full items-center justify-center rounded-xl border-2 border-[#2d6579] bg-[#176f83] px-5 py-3 text-sm font-bold leading-tight text-white shadow-lg shadow-[#176f83]/40 transition hover:bg-[#1b5d73] hover:shadow-[#176f83]/60 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
+                   
+                    style={{ width: "720px", maxWidth: "100%", boxSizing: "border-box" }} className="flex min-h-[64px] w-full items-center justify-center rounded-xl border-2 border-[#2d6579] bg-[#176f83] px-5 py-3 text-sm font-bold leading-tight text-white shadow-lg shadow-[#176f83]/40 transition-all duration-200 ease-out hover:bg-[#238da5] hover:shadow-[0_0_35px_rgba(35,141,165,0.95)] hover:-translate-y-1 active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 disabled:cursor-not-allowed disabled:opacity-80"
                   >
                     {!interviewStarted ? (
                       "CLICK HERE TO START YOUR INTERVIEW"
@@ -1696,10 +1685,172 @@ const recognitionRestartTimerRef = useRef<number | null>(null);
               </div>
           </aside>
         </div>
+
+      <div className="fixed z-30 flex flex-col items-center px-0" style={conversationCollapsed ? { left: "50%", top: "calc(50vh + min(12.75vw, 232px) + 59px)", transform: "translateX(-50%)", width: "min(46vw, 850px)", maxWidth: "calc(100vw - 24px)", boxSizing: "border-box" } : { left: "calc(70% + 10px)", top: "calc(50vh + min(9vw, 167px) + 95px)", transform: "translateX(-50%)", width: "min(46vw, 850px)", maxWidth: "calc(100vw - 24px)", boxSizing: "border-box" }}>
+              {/* FINISH ANSWER ACTION */}
+              <div className="mx-auto w-full shrink-0">
+                <button
+                  type="button"
+                  onClick={submitInterview}
+                  disabled={status === "processing" || status === "complete"}
+                  style={{ width: "720px", maxWidth: "100%", boxSizing: "border-box" }} className="group mx-auto flex min-h-[64px] w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-center text-white shadow-lg shadow-red-500/40 transition-all duration-200 ease-out hover:bg-red-500 hover:shadow-[0_0_35px_rgba(239,68,68,0.95)] hover:-translate-y-1 active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <div className="min-w-0 flex-1 leading-tight">
+                    <div className="whitespace-normal break-words text-sm font-bold tracking-normal">
+                      {status === "processing"
+                        ? "Processing response..."
+                        : "CLICK HERE TO END YOUR INTERVIEW"}
+                    </div>
+                  </div>
+
+                  </button>
+      </div>
+</div>
+
       </div>
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
